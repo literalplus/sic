@@ -1,10 +1,10 @@
-# Default database/Spring configuration for Tingo.
+# Default database/Spring configuration for sic.
 # Copy to application.yml in the application's working directory.
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost/tingo
-    username: tingo
+    url: jdbc:mysql://localhost/sic
+    username: sic
     password: my-very-secure-password
 tingo:
   registerSecret: my-secret

@@ -1,0 +1,43 @@
+<div class="alert alert-error" ng-hide="isAuthenticated()">
+    Du bist nicht eingeloggt! <a ui-sref="login">Login</a>
+</div>
+
+<div ng-show="isAuthenticated()">
+    <div ng-hide="detailCtrl.isFetched()">
+        Lade Zitate...
+    </div>
+
+    <div ng-show="detailCtrl.isFetched()">
+        <h1>
+            {{detailCtrl.getPerson().name}}
+            <small ng-show="detailCtrl.getPerson().id">
+                <span class="sic-person-actions">
+                    <a ng-click="detailCtrl.new()"
+                       title="Neues Zitat" class="glyphicon glyphicon-plus"></a>
+                    <a title="Bearbeitungsmodus" class="glyphicon glyphicon-edit"
+                       ng-click="detailCtrl.editMode = true" ng-hide="detailCtrl.editMode"><!-- TODO: edit concept --></a>
+                    <a title="Bearbeitungsmodus beenden" class="glyphicon glyphicon-check"
+                       ng-click="detailCtrl.editMode = false" ng-show="detailCtrl.editMode"></a>
+                </span>
+            </small>
+        </h1>
+
+        <div class="alert alert-info" ng-show="detailCtrl.editMode"> <!-- TODO -->
+            Klicke jetzt auf ein Feld, um es zu bearbeiten.
+        </div>
+
+        <div class="container-fluid">
+            <div class="col-xs-6 col-sm-2-4 sic-quote-tile"
+                 ng-repeat="quote in detailCtrl.getQuotes()" uib-tooltip-template="'/partials/detail-tooltip.html'"
+                 tooltip-is-open="!!quote.editing || !!quote.hovering" tooltip-trigger="none"
+                 ng-click="detailCtrl.handleDblClick(quote)"
+                 ng-mouseenter="quote.hovering = true" ng-mouseleave="quote.hovering = false">
+                <span ng-hide="!!quote.editing">{{quote.text}}</span>
+                <div ng-show="!!quote.editing" class="sic-fill-parent">
+            <textarea ng-model="quote.text" title="Zitat bearbeiten"
+                      placeholder="Zitat eingeben..."></textarea>
+                </div>
+            </div>
+        </div>
+    </div> <!-- /isFetched() -->
+</div> <!-- /isAuthenticated() -->

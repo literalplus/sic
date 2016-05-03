@@ -19,7 +19,7 @@ module.exports = function (grunt) {
                 },
                 build: {
                     files: {
-                        'build/resources/static/js/tingo.min.js': 'src/main/js/**.js'
+                        'build/resources/static/js/sic.min.js': 'src/main/js/**.js'
                     }
                 }
             },
@@ -27,14 +27,14 @@ module.exports = function (grunt) {
             concat: {
                 dist: {
                     src: 'src/main/js/**.js',
-                    dest: 'build/resources/static/js/tingo.js'
+                    dest: 'build/resources/static/js/sic.js'
                 }
             },
 
             less: {
                 build: {
                     files: {
-                        'build/resources/static/css/tingo.css': 'src/main/less/tingo.less'
+                        'build/resources/static/css/sic.css': 'src/main/less/sic.less'
                     }
                 }
             },
@@ -45,7 +45,7 @@ module.exports = function (grunt) {
                 },
                 build: {
                     files: {
-                        'build/resources/static/css/tingo.min.css': 'build/resources/static/css/tingo.css'
+                        'build/resources/static/css/sic.min.css': 'build/resources/static/css/sic.css'
                     }
                 }
             },

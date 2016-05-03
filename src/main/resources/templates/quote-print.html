@@ -1,0 +1,25 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Zitat drucken | sic</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8"/>
+    <!--suppress HtmlUnknownTarget -->
+    <link rel="stylesheet" href="/css/sic.min.css"/>
+</head>
+
+<body>
+<!--/*@thymesVar id="person" type="li.l1t.sic.model.Person"*/-->
+<!--/*@thymesVar id="quote" type="li.l1t.sic.model.Quote"*/-->
+
+<span th:if="${quote == null}">
+    Zitat nicht gefunden.
+</span>
+
+<div th:if="${quote != null}">
+    <div>
+        <span th:text="${quote.getText()}"></span> <!-- TODO -->
+    </div>
+</div>
+</body>
+</html>

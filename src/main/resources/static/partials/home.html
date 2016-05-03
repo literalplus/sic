@@ -1,38 +1,38 @@
-<div ng-hide="isAuthenticated()" xmlns="http://www.w3.org/1999/html">
+<div ng-hide="isAuthenticated()">
     <div class="pull-right image-margin">
         <img class="img-responsive" src="https://placekitten.com/510/300"/>
-        Inspirierendes Bild einer cuten Katze, damit der Besucher Positives<br/>
-        mit dem Produkt verbindet
+        Inspirierendes Bild einer cuten Katze, damit sich Besucher<br/>
+        sofort wohl f&uuml;hlen
     </div>
 
     <div class="jumbotron">
-        <h1>Eine vollkommen neue Erfahrung</h1>
+        <h1>Zitatmanagement wie nie zuvor</h1>
         <p>
             Dies ist ein inspirierender Text, der Besucher dieser Webseite zu weiteren Aktionen
-            motiviert. Er beschreibt, wie dieses Produkt durch eine nie dagewesene Bingo-Erfahrung
-            ihr Leben vollkommen zum Besseren wenden kann.
+            motiviert. Er beschreibt, wie dieses Produkt durch noch nie zuvor gesehenes
+            Zitatmanagement ihr Leben vollkommen zum Besseren wenden kann.
         </p>
     </div>
 </div>
 
 <div ng-show="isAuthenticated()">
     <div class="jumbotron">
-        <h1>Eine vollkommen neue Erfahrung</h1>
+        <h1>Zitatmanagement wie nie zuvor</h1>
         <p>
-            Willkommen bei Tingo, dem zentralisierten Lehrerbingoservice! Bitte w&auml;hle unten eine
-            Lehrperson aus, zu der du ein Spielfeld generieren möchtest.
+            Willkommen bei sic, dem zentralisierten Zitatservice! Bitte w&auml;hle unten eine
+            Person aus, zu der du Zitate ansehen m&ouml;chtest.
         </p>
     </div>
 
-    <div class="container-fluid tingo-teacher-tile-container">
-        <div class="col-xs-12 col-md-4 tingo-teacher-tile-wrapper"
-             ng-repeat="teacher in homeCtrl.teachers"> <!-- grid wrapper -->
-            <a ui-sref="teachers.detail({id: teacher.id})">
-                <div class="tingo-teacher-tile bg-primary">
+    <div class="container-fluid sic-person-tile-container">
+        <div class="col-xs-12 col-md-4 sic-person-tile-wrapper"
+             ng-repeat="person in homeCtrl.people"> <!-- grid wrapper -->
+            <a ui-sref="person.detail({id: person.id})">
+                <div class="sic-person-tile bg-primary">
                     <!-- actual tile, for margins without killing the columns -->
                    <span class="text-center">
-                       {{teacher.firstName}}<br/>
-                       {{teacher.lastName}}
+                       {{person.firstName}}<br/>
+                       {{person.lastName}}
                    </span>
                 </div>
             </a>
