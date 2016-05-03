@@ -1,18 +1,18 @@
 # sic
 
-`sic` is a web application built to manage quotes attributed to people. It is based on 
+__sic__ is a web application built to manage quotes attributed to people. It is based on 
 [Tingo](https://github.com/xxyy/tingo), which uses technologies like AngularJS (JS is bad, I know, but this is supposed
 to be a simple and fast project), lesscss and the Spring Framework.
 
 ## What is it?
 
-Specifically, `sic` allows anyone knowing a secret code to register, view and manage quotes. People do currently have
+Specifically, _sic_ allows anyone knowing a secret code to register, view and manage quotes. People do currently have
 to be created by an administrator, but this might change in the future. It will also provide a convenient print view
 which allows people to print quotes for displaying them on a wall or something.
 
 ## Installation
 
-To install `sic`, you first need to build it: (assuming you're on GNU/Linux, other platforms work similarly)
+To install _sic_, you first need to build it: (assuming you're on GNU/Linux, other platforms work similarly)
 
 ````bash
 git clone https://github.com/xxyy/sic.git
