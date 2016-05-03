@@ -37,7 +37,7 @@ It will start on port 8080 by default.
 
 ## License
 
-This project is licensed under the Apace License, Version 2.0. You can find a copy in the `LICENSE` file.
+This project is licensed under the Apache License, Version 2.0. You can find a copy in the `LICENSE` file.
 
 ## Support
 
