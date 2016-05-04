@@ -1,11 +1,12 @@
 package li.l1t.sic.rest;
 
-import li.l1t.sic.model.Person;
 import li.l1t.sic.model.dto.PersonDto;
 import li.l1t.sic.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -36,7 +37,12 @@ public class PersonController {
     }
 
     @RequestMapping("/api/person/by/id/{id}")
-    public Person singlePerson(@PathVariable("id") int id) {
-        return personService.getById(id);
+    public PersonDto singlePerson(@PathVariable("id") int id) {
+        return personService.toDto(personService.getById(id));
+    }
+
+    @RequestMapping(value = "/apt/person/new", method = RequestMethod.POST)
+    public PersonDto newPerson(@RequestBody PersonDto personDto) {
+        return personService.toDto(personService.newPerson(personDto));
     }
 }

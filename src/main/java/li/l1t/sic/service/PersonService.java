@@ -30,6 +30,18 @@ public class PersonService {
         return person;
     }
 
+    /**
+     * Creates a new person from a DTO and saves it to database.
+     * @param dto the dto to create the person from
+     * @return the created person
+     */
+    public Person newPerson(PersonDto dto) {
+        Person person = new Person();
+        person.setName(dto.getName());
+        personRepository.save(person);
+        return person;
+    }
+
     public PersonDto toDto(Person entity) {
         PersonDto dto = new PersonDto();
         dto.setId(entity.getId());
