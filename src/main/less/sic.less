@@ -6,6 +6,8 @@
 @brand-primary:         #4CAF50;
 @brand-success:         #2196F3;
 
+@tile-hover:            #d1dce1;
+
 /* Bootstrap Sticky Footer */
 html {
   position: relative;
@@ -61,16 +63,20 @@ body {
     line-height: 1.1;
   }
 
-  .sic-new-person {
-    border: 2px dashed whitesmoke;
-    border-radius: 10px;
-    padding: 20px 5% 19px; /* top left/right bottom */
-    font-size: 200%;
+  &:hover {
+    color: @tile-hover;
   }
 }
 
-.sic-person-tile:hover {
-  color: #d1dce1;
+.sic-new-person-tile {
+  border: 5px dashed @brand-primary;
+  color: @brand-primary;
+  //border-radius: 10px;
+  font-size: 400%;
+
+  &:hover {
+    border: 5px dashed @tile-hover;
+  }
 }
 
 .sic-person-tile-wrapper a:hover {
