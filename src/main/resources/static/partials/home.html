@@ -37,6 +37,17 @@
                 </div>
             </a>
         </div>
+        <dic ng-class="col xs-12 col-md-4 sic-person-tile-wrapper">
+            <a ui-sref="person.detail({id: 'new'})">
+                <div class="sic-person-tile bg-primary">
+                    <!-- actual tile, for margins without killing the columns -->
+                   <span class="text-center">
+                       {{person.firstName}}<br/>
+                       {{person.lastName}}
+                   </span>
+                </div>
+            </a>
+        </dic>
     </div>
 </div>
 
