@@ -1,5 +1,5 @@
-tingoApp.factory('PersonDetailService', ['$http',
-    function ($http) {
+tingoApp.factory('PersonDetailService', ['$http', '$location', '$uibModal',
+    function ($http, $location, $uibModal) {
         var detailService = {};
         detailService.person = {name: 'Loading..'};
         detailService.quotes = [];
@@ -49,12 +49,35 @@ tingoApp.factory('PersonDetailService', ['$http',
 
         detailService.fetch = function (id) {
             fetched = false;
-            $http.get('/api/quote/by/person/' + id)
-                .success(function (data) {
-                    detailService.person = data.person;
-                    detailService.quotes = data.quotes;
-                    fetched = true;
-                });
+            
+            if (id == 'new') {
+                $uibModal.open({
+                    controller: 'PersonNameModalController',
+                    controllerAs: 'modalCtrl',
+                    templateUrl: 'partials/person-name-modal.html'
+                }).result.then(
+                    function (newName) {
+                        $http.post('/api/person/new', {name: newName})
+                            .then(function (response) {
+                                detailService.person = response.data;
+                                detailService.quotes = [];
+                                fetched = true;
+                            }, function (response) {
+                                alert('Fehler beim Erstellen der Person!');
+                                console.error(response);
+                            });
+                    }, function () {
+                        $location.go('/'); //can't be in controller since we need to handle ESC too
+                    }
+                );
+            } else {
+                $http.get('/api/quote/by/person/' + id)
+                    .success(function (data) {
+                        detailService.person = data.person;
+                        detailService.quotes = data.quotes;
+                        fetched = true;
+                    });
+            }
         };
 
         // Getters and Setters
