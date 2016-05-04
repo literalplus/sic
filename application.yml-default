@@ -6,6 +6,6 @@ spring:
     url: jdbc:mysql://localhost/sic
     username: sic
     password: my-very-secure-password
-tingo:
+sic:
   registerSecret: my-secret
   footerText: 'This service is provided by Aperture Laboratories. Change this text in application.yml.'
