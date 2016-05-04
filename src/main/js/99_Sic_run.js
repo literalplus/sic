@@ -29,7 +29,7 @@ tingoApp.run(['$rootScope', '$state', '$location', 'AuthService',
 
 tingoApp.controller('HomeController', HomeController);
 tingoApp.controller('AuthController', AuthController);
-tingoApp.controller('TeacherDetailController', TeacherDetailController);
+tingoApp.controller('PersonDetailController', PersonDetailController);
 tingoApp.controller('LoginController', LoginController);
 tingoApp.controller('RegisterController', RegisterController);
 tingoApp.controller('NavDataController', NavDataController);
