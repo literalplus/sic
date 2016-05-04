@@ -41,7 +41,7 @@ public class PersonController {
         return personService.toDto(personService.getById(id));
     }
 
-    @RequestMapping(value = "/apt/person/new", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/person/new", method = RequestMethod.POST)
     public PersonDto newPerson(@RequestBody PersonDto personDto) {
         return personService.toDto(personService.newPerson(personDto));
     }
