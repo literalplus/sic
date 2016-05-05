@@ -15,7 +15,8 @@
                     <a ng-click="detailCtrl.new()"
                        title="Neues Zitat" class="glyphicon glyphicon-plus"></a>
                     <a title="Bearbeitungsmodus" class="glyphicon glyphicon-edit"
-                       ng-click="detailCtrl.editMode = true" ng-hide="detailCtrl.editMode"><!-- TODO: edit concept --></a>
+                       ng-click="detailCtrl.editMode = true"
+                       ng-hide="detailCtrl.editMode"><!-- TODO: edit concept --></a>
                     <a title="Bearbeitungsmodus beenden" class="glyphicon glyphicon-check"
                        ng-click="detailCtrl.editMode = false" ng-show="detailCtrl.editMode"></a>
                 </span>
@@ -27,16 +28,19 @@
         </div>
 
         <div class="container-fluid">
-            <div class="col-xs-6 col-sm-2-4 sic-quote-tile"
-                 ng-repeat="quote in detailCtrl.getQuotes()" uib-tooltip-template="'/partials/detail-tooltip.html'"
+            <div ng-repeat="quote in detailCtrl.getQuotes()" uib-tooltip-template="'/partials/detail-tooltip.html'"
                  tooltip-is-open="!!quote.editing || !!quote.hovering" tooltip-trigger="none"
                  ng-click="detailCtrl.handleDblClick(quote)"
                  ng-mouseenter="quote.hovering = true" ng-mouseleave="quote.hovering = false">
-                <span ng-hide="!!quote.editing">{{quote.text}}</span>
-                <div ng-show="!!quote.editing" class="sic-fill-parent">
-            <textarea ng-model="quote.text" title="Zitat bearbeiten"
-                      placeholder="Zitat eingeben..."></textarea>
-                </div>
+
+                <blockquote class="sic-quote" ng-class-even="'blockquote-reverse'">
+                    <p>
+                        <span ng-hide="!!quote.editing">{{quote.text}}</span>
+                        <textarea ng-show="!!quote.editing" ng-model="quote.text"
+                                  placeholder="Zitat eingeben..."></textarea>
+                    </p>
+                    <footer>{{detailCtrl.getPerson().name}}</footer>
+                </blockquote>
             </div>
         </div>
     </div> <!-- /isFetched() -->

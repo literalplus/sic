@@ -3,10 +3,10 @@
 @import "../../../node_modules/bootswatch-less/bootswatch/paper/bootswatch";
 
 /* Use green as primary color so that we're easily distinguishable from Tingo (just swapped those two) */
-@brand-primary:         #4CAF50;
-@brand-success:         #2196F3;
+@brand-primary: #4CAF50;
+@brand-success: #2196F3;
 
-@tile-hover:            #d1dce1;
+@tile-hover: #d1dce1;
 
 /* Bootstrap Sticky Footer */
 html {
@@ -103,6 +103,36 @@ body {
   }
 }
 
+.sic-quote {
+  p {
+    .h2();
+
+    &:before {
+      content: "„"; //alternative: »
+    }
+
+    &:after {
+      content: "“"; //alternative: «
+    }
+  }
+
+  footer {
+    font-size: 150%;
+
+    &:before {
+      content: "–  ";
+    }
+
+    &:after {
+      content: "     ";
+    }
+  }
+
+  textarea {
+    width: 90%;
+  }
+}
+
 .sic-person-actions {
   margin-left: 2em;
 
@@ -111,7 +141,7 @@ body {
   }
 }
 
-.sic-quote-author {
+.sic-quote-author-tooltip {
   margin-top: 5px;
 }
 
