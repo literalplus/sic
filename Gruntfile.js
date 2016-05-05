@@ -84,7 +84,9 @@ module.exports = function (grunt) {
 
 // Default task(s).
     grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'less', 'cssmin', 'copy']);
-    grunt.registerTask('watch', ['watch']);
+    grunt.registerTask('watchcss', ['less', 'cssmin', 'watch']);
+    grunt.registerTask('watchjs', ['jshint', 'concat', 'uglify', 'watch']);
+    grunt.registerTask('watch', ['jshint', 'concat', 'uglify', 'less', 'cssmin', 'watch']);
 
 }
 ;
