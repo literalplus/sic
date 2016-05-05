@@ -8,7 +8,6 @@ package li.l1t.sic.model.dto;
  */
 public class PersonDto {
     private int id;
-    private String abbreviation;
     private String name;
 
     public long getId() {
@@ -17,14 +16,6 @@ public class PersonDto {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getAbbreviation() {
-        return abbreviation;
-    }
-
-    public void setAbbreviation(String abbreviation) {
-        this.abbreviation = abbreviation;
     }
 
     public String getName() {

@@ -9,20 +9,20 @@ import java.util.List;
  * @since 18.2.16
  */
 public class QuotesDto {
-    private PersonDto teacher;
+    private PersonDto person;
     private List<QuoteDto> quotes;
 
-    public QuotesDto(PersonDto teacher, List<QuoteDto> quotes) {
-        this.teacher = teacher;
+    public QuotesDto(PersonDto person, List<QuoteDto> quotes) {
+        this.person = person;
         this.quotes = quotes;
     }
 
-    public PersonDto getTeacher() {
-        return teacher;
+    public PersonDto getPerson() {
+        return person;
     }
 
-    public void setTeacher(PersonDto teacher) {
-        this.teacher = teacher;
+    public void setPerson(PersonDto person) {
+        this.person = person;
     }
 
     public List<QuoteDto> getQuotes() {
