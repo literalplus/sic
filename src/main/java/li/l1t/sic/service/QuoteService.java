@@ -45,11 +45,15 @@ public class QuoteService {
         quoteDto.setText(quote.getText());
         quoteDto.setPersonId(quote.getPerson().getId());
         quoteDto.setCreatorName(quote.getCreator() == null ? "???" : quote.getCreator().getName());
+        quoteDto.setSubText(quote.getSubText());
+        quoteDto.setVoteCount(quote.getVoteCount());
         return quoteDto;
     }
 
     public Quote adaptFromDto(Quote quote, QuoteDto dto) {
         quote.setText(dto.getText());
+        quote.setSubText(dto.getSubText());
+        quote.setVoteCount(dto.getVoteCount());
         return quote;
     }
 

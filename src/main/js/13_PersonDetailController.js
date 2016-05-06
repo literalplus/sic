@@ -15,6 +15,16 @@ var PersonDetailController = ['PersonDetailService', '$stateParams',
         this.handleDblClick = function (quote) {
             ctrl.edit(quote);
         };
+        
+        this.getFriendlyVoteCount = function (quote) {
+            if (quote.voteCount === 0) {
+                return '±0';
+            } else if (quote.voteCount > 0) {
+                return '+' + quote.voteCount;
+            } else {
+                return quote.voteCount;
+            }
+        };
 
         PersonDetailService.fetch($stateParams.id);
     }];

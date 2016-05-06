@@ -39,7 +39,17 @@
                         <textarea ng-show="!!quote.editing" ng-model="quote.text"
                                   placeholder="Zitat eingeben..."></textarea>
                     </p>
-                    <footer>{{detailCtrl.getPerson().name}}</footer>
+                    <footer>
+                        {{detailCtrl.getPerson().name}},
+                        <span ng-hide="!!quote.editing">
+                            {{quote.subText}}
+                        </span>
+                        <input type="text" ng-show="!!quote.editing"
+                               ng-model="quote.subText" placeholder="Subtext">
+                        <abbr title="Summe der Up/Downvotes +1 f&uuml;r dieses Zitat">
+                            {{detailCtrl.getFriendlyVoteCount(quote)}}
+                        </abbr>
+                    </footer>
                 </blockquote>
             </div>
         </div>

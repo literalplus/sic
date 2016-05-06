@@ -32,6 +32,14 @@ public class Quote extends BaseEntity {
     @JoinColumn(name = "creator_name", updatable = false)
     private User creator;
 
+    @Column(nullable = false, columnDefinition = "VARCHAR(255)", name = "sub_text")
+    @Valid
+    @Length(max = 140)
+    private String subText; //any additional text added after the name, like occasion or date
+
+    @Column(nullable = false, name = "vote_count")
+    private int voteCount;
+
     protected Quote() { }
 
     public Quote(Person person, String text) {
@@ -64,12 +72,30 @@ public class Quote extends BaseEntity {
         this.creator = creator;
     }
 
+    public String getSubText() {
+        return subText;
+    }
+
+    public void setSubText(String subText) {
+        this.subText = subText;
+    }
+
+    public int getVoteCount() {
+        return voteCount;
+    }
+
+    public void setVoteCount(int voteCount) {
+        this.voteCount = voteCount;
+    }
+
     @Override
     public String toString() {
         return "Quote{" +
                 "person=" + person +
                 ", text='" + text + '\'' +
                 ", creator=" + creator +
+                ", subText='" + subText + '\'' +
+                ", voteCount=" + voteCount +
                 '}';
     }
 }
