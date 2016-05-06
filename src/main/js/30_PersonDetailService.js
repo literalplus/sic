@@ -31,6 +31,41 @@ tingoApp.factory('PersonDetailService', ['$http', '$location', '$uibModal',
             quote.backup = _.clone(quote);
             quote.editing = true;
         };
+        
+        detailService.isUpVote = function (quote) {
+            return quote.ownVote === 1;
+        };
+
+        detailService.isDownVote = function (quote) {
+            return quote.ownVote === -1;
+        };
+
+        detailService.setVote = function (quote, newVote) {
+            var voteType;
+            if (newVote === -1) {
+                voteType = 'down';
+            } else if (newVote === 1) {
+                voteType = 'up';
+            } else {
+                voteType = 'reset';
+            }
+            
+            if (quote.ownVote === newVote) {
+                voteType = 'reset';
+                quote.ownVote = 0;
+            } else {
+                quote.ownVote = newVote;
+            }
+            
+            $http.get('/api/quote/by/id/' + quote.id + '/vote/' + voteType)
+                .then(function (response) {
+                    quote.voteCount = response.data;
+                }, function (response) {
+                    console.warn('Couldn\'t change quote vote: ');
+                    console.warn(response);
+                    alert('Fehler beim Voten: ' + response.data.errorMessage);
+                });
+        };
 
         detailService.new = function () {
             detailService.quotes.push({
@@ -56,7 +91,7 @@ tingoApp.factory('PersonDetailService', ['$http', '$location', '$uibModal',
 
         detailService.fetch = function (id) {
             fetched = false;
-            
+
             if (id == 'new') {
                 $uibModal.open({
                     controller: 'PersonNameModalController',

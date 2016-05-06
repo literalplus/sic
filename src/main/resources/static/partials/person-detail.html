@@ -41,13 +41,17 @@
                         </abbr>
                         &bull;
                         <div class="btn-group" ng-hide="!!quote.editing">
-                            <button class="btn btn-primary btn-xs" title="+1 f&uuml;r dieses Zitat">
+                            <button class="btn btn-primary btn-xs" title="+1 f&uuml;r dieses Zitat"
+                                    ng-class="{'active': detailCtrl.isUpVote(quote)}"
+                                    ng-click="detailCtrl.setVote(quote, 1)">
                                 +
                             </button>
                             <button class="btn btn-default btn-xs" disabled>
                                 {{detailCtrl.getFriendlyVoteCount(quote)}}
                             </button>
-                            <button class="btn btn-danger btn-xs" title="-1 f&uuml;r dieses Zitat">
+                            <button class="btn btn-danger btn-xs" title="-1 f&uuml;r dieses Zitat"
+                                    ng-class="{'active': detailCtrl.isDownVote(quote)}"
+                                    ng-click="detailCtrl.setVote(quote, -1)">
                                 -
                             </button>
                         </div>

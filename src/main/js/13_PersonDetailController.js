@@ -12,6 +12,10 @@ var PersonDetailController = ['PersonDetailService', '$stateParams',
         this.delete = PersonDetailService.delete;
         this.isFetched = PersonDetailService.isFetched;
         
+        this.isUpVote = PersonDetailService.isUpVote;
+        this.isDownVote = PersonDetailService.isDownVote;
+        this.setVote = PersonDetailService.setVote;
+        
         this.getFriendlyVoteCount = function (quote) {
             if (quote.voteCount === 0) {
                 return '±0';
