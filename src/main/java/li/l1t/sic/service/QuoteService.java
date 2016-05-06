@@ -87,6 +87,10 @@ public class QuoteService {
         }
     }
 
+    public void save(Quote quote) {
+        quoteRepository.save(quote);
+    }
+
     public Quote save(QuoteDto spec) {
         return save(spec, null);
     }

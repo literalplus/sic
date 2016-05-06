@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.List;
 
 /**
  * Service managing votes on quotes.
@@ -21,6 +22,8 @@ public class QuoteVoteService {
     private QuoteVoteRepository repository;
     @Autowired
     private UserService userService;
+    @Autowired
+    private QuoteService quoteService;
 
     public int findVoteStatus(Quote quote, Principal principal) {
         QuoteVote vote = findVote(quote, principal);
@@ -44,12 +47,10 @@ public class QuoteVoteService {
             vote = new QuoteVote(quote, userService.fromPrincipal(principal), isUpvote);
         } else if (vote.isUpvote() == isUpvote){
             throw new JsonPropagatingException("Already voted on that quote!");
-        } else { //undo previous vote
-            quote.setVoteCount(quote.getVoteCount() - vote.getModifier());
         }
         vote.setUpvote(isUpvote);
-        quote.setVoteCount(quote.getVoteCount() + vote.getModifier());
         repository.save(vote);
+        recalculateVoteCount(quote);
         return vote;
     }
 
@@ -57,7 +58,16 @@ public class QuoteVoteService {
         QuoteVote vote = findVote(quote, principal);
         if (vote != null){
             repository.delete(vote);
-            quote.setVoteCount(quote.getVoteCount() - vote.getModifier());
+            recalculateVoteCount(quote);
         } //else, no-op
+    }
+
+    public void recalculateVoteCount(Quote quote) {
+        List<QuoteVote> votes = repository.findAllByIdQuote(quote);
+        int voteCount = votes.stream()
+                .mapToInt(QuoteVote::getModifier)
+                .sum();
+        quote.setVoteCount(voteCount);
+        quoteService.save(quote);
     }
 }

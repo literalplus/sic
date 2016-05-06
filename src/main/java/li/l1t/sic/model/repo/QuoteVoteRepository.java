@@ -1,7 +1,11 @@
 package li.l1t.sic.model.repo;
 
+import li.l1t.sic.model.Quote;
 import li.l1t.sic.model.QuoteVote;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Repository for votes on quotes.
@@ -9,5 +13,8 @@ import org.springframework.data.repository.CrudRepository;
  * @author <a href="http://xxyy.github.io/">xxyy</a>
  * @since 2016-05-07
  */
+@Repository
 public interface QuoteVoteRepository extends CrudRepository<QuoteVote, QuoteVote.QuoteVoteId> {
+
+    List<QuoteVote> findAllByIdQuote(Quote quote);
 }
