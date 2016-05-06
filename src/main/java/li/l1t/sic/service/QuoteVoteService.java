@@ -21,6 +21,15 @@ public class QuoteVoteService {
     @Autowired
     private UserService userService;
 
+    public int findVoteStatus(Quote quote, Principal principal) {
+        QuoteVote vote = findVote(quote, principal);
+        if(vote == null) {
+            return 0;
+        } else {
+            return vote.getModifier();
+        }
+    }
+
     public QuoteVote findVote(Quote quote, Principal principal) {
         return repository.findOne(new QuoteVote.QuoteVoteId(
                 userService.fromPrincipal(principal),

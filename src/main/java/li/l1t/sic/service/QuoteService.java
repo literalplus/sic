@@ -27,6 +27,8 @@ public class QuoteService {
     private PersonService personService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private QuoteVoteService voteService;
 
     public List<Quote> getAllQuotesByPerson(Person person) {
         return quoteRepository.findAllByPerson(person);
@@ -38,6 +40,16 @@ public class QuoteService {
      * @return a DTO containing copied data from the quote
      */
     public QuoteDto toDto(Quote quote) {
+        return toDto(quote, null);
+    }
+
+    /**
+     * Maps a model quote to a Data Transfer Object.
+     * @param quote the quote to map
+     * @param user the user to use for user-specific properties
+     * @return a DTO containing copied data from the quote
+     */
+    public QuoteDto toDto(Quote quote, Principal user) {
         Validate.notNull(quote, "quote");
         Validate.notNull(quote.getPerson(), "quote.getPerson()");
         QuoteDto quoteDto = new QuoteDto();
@@ -47,6 +59,9 @@ public class QuoteService {
         quoteDto.setCreatorName(quote.getCreator() == null ? "???" : quote.getCreator().getName());
         quoteDto.setSubText(quote.getSubText());
         quoteDto.setVoteCount(quote.getVoteCount());
+        if(user != null) {
+            quoteDto.setOwnVote(voteService.findVoteStatus(quote, user));
+        }
         return quoteDto;
     }
 

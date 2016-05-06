@@ -13,6 +13,7 @@ public class QuoteDto {
     private String creatorName;
     private String subText;
     private int voteCount;
+    private int ownVote; //-1, 0 or +1, respectively
 
     public int getId() {
         return id;
@@ -60,5 +61,13 @@ public class QuoteDto {
 
     public void setVoteCount(int voteCount) {
         this.voteCount = voteCount;
+    }
+
+    public int getOwnVote() {
+        return ownVote;
+    }
+
+    public void setOwnVote(int ownVote) {
+        this.ownVote = ownVote;
     }
 }

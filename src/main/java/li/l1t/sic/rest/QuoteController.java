@@ -38,11 +38,12 @@ public class QuoteController {
 
     @RequestMapping("/api/quote/by/person/{personId}")
     public QuotesDto byPersonId(@PathVariable("personId") int personId,
-                                 @RequestParam(name = "limit", defaultValue = "0") int limit) {
+                                 @RequestParam(name = "limit", defaultValue = "0") int limit,
+                                Principal user) {
         Person person = personService.getById(personId);
 
         List<QuoteDto> fields = StreamSupport.stream(quoteService.getAllQuotesByPerson(person).spliterator(), false)
-                .map(quoteService::toDto)
+                .map((quote) -> quoteService.toDto(quote, user))
                 .collect(Collectors.toList());
 
         if(limit > 0) { //If we have a limit, apply it; Using streams for easier API (no bounds checking necessary)
@@ -54,13 +55,13 @@ public class QuoteController {
 
     @RequestMapping(value = "/api/quote/save", method = RequestMethod.POST)
     public QuoteDto save(@RequestBody QuoteDto quote, Principal user) {
-        return quoteService.toDto(quoteService.save(quote, user));
+        return quoteService.toDto(quoteService.save(quote, user), user);
     }
 
     @RequestMapping(value = "/api/quote/delete", method = RequestMethod.POST)
-    public QuoteDto deleteById(@RequestBody QuoteDto quoteDto) {
+    public QuoteDto deleteById(@RequestBody QuoteDto quoteDto, Principal user) {
         Quote quote = quoteService.toEntity(quoteDto);
         quoteService.delete(quote);
-        return quoteService.toDto(quote);
+        return quoteService.toDto(quote, user);
     }
 }
