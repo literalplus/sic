@@ -1,5 +1,6 @@
 package li.l1t.sic.service;
 
+import li.l1t.sic.exception.JsonPropagatingException;
 import li.l1t.sic.model.Quote;
 import li.l1t.sic.model.QuoteVote;
 import li.l1t.sic.model.repo.QuoteVoteRepository;
@@ -42,7 +43,7 @@ public class QuoteVoteService {
         if (vote == null){
             vote = new QuoteVote(quote, userService.fromPrincipal(principal), isUpvote);
         } else if (vote.isUpvote() == isUpvote){
-            throw new IllegalStateException("Already voted on that quote!");
+            throw new JsonPropagatingException("Already voted on that quote!");
         } else { //undo previous vote
             quote.setVoteCount(quote.getVoteCount() - vote.getModifier());
         }
