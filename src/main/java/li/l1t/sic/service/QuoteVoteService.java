@@ -43,6 +43,8 @@ public class QuoteVoteService {
             vote = new QuoteVote(quote, userService.fromPrincipal(principal), isUpvote);
         } else if (vote.isUpvote() == isUpvote){
             throw new IllegalStateException("Already voted on that quote!");
+        } else { //undo previous vote
+            quote.setVoteCount(quote.getVoteCount() - vote.getModifier());
         }
         vote.setUpvote(isUpvote);
         quote.setVoteCount(quote.getVoteCount() + vote.getModifier());
@@ -54,6 +56,7 @@ public class QuoteVoteService {
         QuoteVote vote = findVote(quote, principal);
         if (vote != null){
             repository.delete(vote);
+            quote.setVoteCount(quote.getVoteCount() - vote.getModifier());
         } //else, no-op
     }
 }
