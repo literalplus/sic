@@ -11,10 +11,6 @@ var PersonDetailController = ['PersonDetailService', '$stateParams',
         this.new = PersonDetailService.new;
         this.delete = PersonDetailService.delete;
         this.isFetched = PersonDetailService.isFetched;
-
-        this.handleDblClick = function (quote) {
-            ctrl.edit(quote);
-        };
         
         this.getFriendlyVoteCount = function (quote) {
             if (quote.voteCount === 0) {
