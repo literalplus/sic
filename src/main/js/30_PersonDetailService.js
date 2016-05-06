@@ -33,7 +33,14 @@ tingoApp.factory('PersonDetailService', ['$http', '$location', '$uibModal',
         };
 
         detailService.new = function () {
-            detailService.quotes.push({text: '', personId: detailService.person.id, editing: true, authorName: 'du'});
+            detailService.quotes.push({
+                text: '',
+                personId: detailService.person.id,
+                editing: true,
+                authorName: 'du',
+                subText: '',
+                voteCount: 0
+            });
         };
 
         detailService.delete = function (quote) {
