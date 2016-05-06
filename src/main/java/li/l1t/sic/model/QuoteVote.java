@@ -25,6 +25,10 @@ public class QuoteVote extends BaseEntity {
     @Column(name = "is_up")
     private boolean isUpvote;
 
+    public QuoteVote() {
+
+    }
+
     public QuoteVote(Quote quote, User user, boolean isUpvote) {
         this.id = new QuoteVoteId(user, quote);
         this.isUpvote = isUpvote;
@@ -63,6 +67,10 @@ public class QuoteVote extends BaseEntity {
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "quote_id", updatable = false)
         private Quote quote;
+
+        public QuoteVoteId() {
+
+        }
 
         public QuoteVoteId(User user, Quote quote) {
             this.user = user;
