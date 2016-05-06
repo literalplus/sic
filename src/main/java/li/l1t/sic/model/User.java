@@ -16,7 +16,7 @@ import javax.validation.Valid;
  */
 @Entity
 @Table(name = "sic_user")
-public class User  {
+public class User {
     @Valid
     @Length(min = 2, max = 20)
     @Column(name = "username")

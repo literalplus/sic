@@ -14,7 +14,7 @@ import javax.validation.Valid;
  */
 @Entity
 @Table(name = "sic_person")
-public class Person extends BaseEntity {
+public class Person extends IdentifiableEntity {
     @Valid
     @Length(max = 100)
     private String name;

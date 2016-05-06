@@ -18,7 +18,7 @@ import javax.validation.Valid;
  */
 @Entity
 @Table(name = "sic_quote")
-public class Quote extends BaseEntity {
+public class Quote extends IdentifiableEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "person_id", updatable = false, nullable = false)
     private Person person;
