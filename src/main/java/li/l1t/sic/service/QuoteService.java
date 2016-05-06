@@ -59,7 +59,7 @@ public class QuoteService {
 
     public Quote toEntity(QuoteDto dto) {
         Person person = personService.getById(dto.getPersonId());
-        Quote quote = new Quote(dto.getId(), person, dto.getText());
+        Quote quote = new Quote(dto.getId(), person);
         return adaptFromDto(quote, dto);
     }
 
@@ -79,14 +79,13 @@ public class QuoteService {
     public Quote save(QuoteDto spec, Principal user) {
         Person person = personService.getById(spec.getPersonId());
         Quote quote = quoteRepository.findOne(spec.getId());
-        if (quote == null) {
-            quote = new Quote(person, spec.getText());
-            if(user != null) {
+        if (quote == null){
+            quote = new Quote(person);
+            if (user != null){
                 quote.setCreator(userService.fromPrincipal(user));
             }
-        } else {
-            adaptFromDto(quote, spec);
         }
+        adaptFromDto(quote, spec);
         return quoteRepository.save(quote);
     }
 

@@ -42,14 +42,13 @@ public class Quote extends BaseEntity {
 
     protected Quote() { }
 
-    public Quote(Person person, String text) {
-        this(0, person, text);
+    public Quote(Person person) {
+        this(0, person);
     }
 
-    public Quote(int id, Person person, String text) {
+    public Quote(int id, Person person) {
         super(id);
         this.person = person;
-        this.text = text;
     }
 
     public Person getPerson() {
