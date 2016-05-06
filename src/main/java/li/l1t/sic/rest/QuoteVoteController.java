@@ -24,20 +24,23 @@ public class QuoteVoteController {
     private QuoteService quoteService;
 
     @RequestMapping(value = "/api/quote/by/id/{id}/vote/up")
-    public void upVote(@PathVariable("id") int quoteId, Principal user) {
+    public int upVote(@PathVariable("id") int quoteId, Principal user) {
         Quote quote = quoteService.findById(quoteId);
         quoteVoteService.setVote(quote, user, true);
+        return quote.getVoteCount();
     }
 
     @RequestMapping(value = "/api/quote/by/id/{id}/vote/down")
-    public void downVote(@PathVariable("id") int quoteId, Principal user) {
+    public int downVote(@PathVariable("id") int quoteId, Principal user) {
         Quote quote = quoteService.findById(quoteId);
         quoteVoteService.setVote(quote, user, false);
+        return quote.getVoteCount();
     }
 
     @RequestMapping(value = "/api/quote/by/id/{id}/vote/reset")
-    public void resetVote(@PathVariable("id") int quoteId, Principal user) {
+    public int resetVote(@PathVariable("id") int quoteId, Principal user) {
         Quote quote = quoteService.findById(quoteId);
         quoteVoteService.unsetVote(quote, user);
+        return quote.getVoteCount();
     }
 }
