@@ -70,4 +70,9 @@ public class QuoteVoteService {
         quote.setVoteCount(voteCount);
         quoteService.save(quote);
     }
+
+    public void deleteAllVotesOn(Quote quote) {
+        repository.findAllByIdQuote(quote).stream()
+                .forEach(repository::delete);
+    }
 }

@@ -40,6 +40,9 @@ public class Quote extends IdentifiableEntity {
     @Column(nullable = false, name = "vote_count")
     private int voteCount;
 
+    @Column(nullable = false)
+    private boolean deleted;
+
     protected Quote() { }
 
     public Quote(Person person) {
@@ -87,6 +90,18 @@ public class Quote extends IdentifiableEntity {
         this.voteCount = voteCount;
     }
 
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
     @Override
     public String toString() {
         return "Quote{" +
@@ -95,6 +110,7 @@ public class Quote extends IdentifiableEntity {
                 ", creator=" + creator +
                 ", subText='" + subText + '\'' +
                 ", voteCount=" + voteCount +
+                ", deleted=" + deleted +
                 '}';
     }
 }

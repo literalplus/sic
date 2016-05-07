@@ -1,6 +1,6 @@
 package li.l1t.sic.service;
 
-import li.l1t.sic.exception.FieldNotFoundException;
+import li.l1t.sic.exception.QuoteNotFoundException;
 import li.l1t.sic.model.Person;
 import li.l1t.sic.model.Quote;
 import li.l1t.sic.model.dto.QuoteDto;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Service handling sic quotes, specifically finding quotes by person,
@@ -31,7 +32,9 @@ public class QuoteService {
     private QuoteVoteService voteService;
 
     public List<Quote> getAllQuotesByPerson(Person person) {
-        return quoteRepository.findAllByPerson(person);
+        return quoteRepository.findAllByPerson(person).stream()
+                .filter(q -> !q.isDeleted())
+                .collect(Collectors.toList());
     }
 
     /**
@@ -80,8 +83,8 @@ public class QuoteService {
 
     public Quote findById(int quoteId) {
         Quote quote = quoteRepository.findOne(quoteId);
-        if(quote == null) {
-            throw new FieldNotFoundException(quoteId);
+        if(quote == null || quote.isDeleted()) {
+            throw new QuoteNotFoundException(quoteId);
         } else {
             return quote;
         }
@@ -109,6 +112,8 @@ public class QuoteService {
     }
 
     public void delete(Quote quote) {
-        quoteRepository.delete(quote);
+        quote.setDeleted(true);
+        save(quote);
+        voteService.deleteAllVotesOn(quote);
     }
 }

@@ -6,8 +6,8 @@ package li.l1t.sic.exception;
  * @author <a href="http://xxyy.github.io/">xxyy</a>
  * @since 2016-03-06
  */
-public class FieldNotFoundException extends JsonPropagatingException {
-    public FieldNotFoundException(int requestedId) {
+public class QuoteNotFoundException extends JsonPropagatingException {
+    public QuoteNotFoundException(int requestedId) {
         super("Unknown field with id " + requestedId);
     }
 }

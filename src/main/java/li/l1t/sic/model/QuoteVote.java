@@ -92,5 +92,24 @@ public class QuoteVote extends BaseEntity {
         public void setQuote(Quote quote) {
             this.quote = quote;
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof QuoteVoteId)) return false;
+
+            QuoteVoteId that = (QuoteVoteId) o;
+
+            if (!getUser().equals(that.getUser())) return false;
+            return getQuote().equals(that.getQuote());
+
+        }
+
+        @Override
+        public int hashCode() {
+            int result = getUser().hashCode();
+            result = 31 * result + getQuote().hashCode();
+            return result;
+        }
     }
 }
