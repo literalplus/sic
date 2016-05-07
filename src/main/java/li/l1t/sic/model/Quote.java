@@ -102,6 +102,10 @@ public class Quote extends IdentifiableEntity {
         this.deleted = deleted;
     }
 
+    public boolean hasSubText() {
+        return getSubText() != null && !getSubText().isEmpty();
+    }
+
     @Override
     public String toString() {
         return "Quote{" +

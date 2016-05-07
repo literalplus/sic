@@ -16,7 +16,7 @@
     <div class="sic-quote sic-print-quote">
         <p th:text="${quote.getText()}"></p> <!-- TODO -->
         <footer>
-            <span th:text="${person.getName()}"></span>,
+            <span th:text="${person.getName()}"></span><span th:if="${quote.hasSubText()}">,</span>
             <span th:text="${quote.getSubText()}"></span>
         </footer>
     </div>
