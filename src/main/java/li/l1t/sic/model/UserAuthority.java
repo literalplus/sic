@@ -5,7 +5,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.Valid;
 
 /**
  * Represents an authority assigned to a user. Necessary because Spring doesn't accept users
