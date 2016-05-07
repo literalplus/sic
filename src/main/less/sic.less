@@ -106,7 +106,10 @@ body {
 .sic-quote {
   p {
     .h3();
-    white-space: pre-line; //preserve newlines
+
+    span {
+      white-space: pre-line; //preserve newlines
+    }
 
     &:before {
       content: "„"; //alternative: »
