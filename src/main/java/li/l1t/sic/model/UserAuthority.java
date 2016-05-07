@@ -2,9 +2,10 @@ package li.l1t.sic.model;
 
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
 
@@ -23,22 +24,27 @@ public class UserAuthority {
 
     @Valid
     @Length(max = 50, min = 3)
-    @Column(name = "username")
-    private String name;
+    @JoinColumn(name = "username")
+    @ManyToOne
+    private User user;
 
     private String authority;
 
-    public UserAuthority(String name, String authority) {
-        this.name = name;
+    public UserAuthority(User user, String authority) {
+        this.user = user;
         this.authority = authority;
     }
 
-    public String getName() {
-        return name;
+    public User getUser() {
+        return user;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getName() {
+        return getUser().getName();
     }
 
     public String getAuthority() {

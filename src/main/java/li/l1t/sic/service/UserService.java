@@ -44,7 +44,7 @@ public class UserService {
         }
 
         User user = userRepository.save(new User(username, passwordEncoder.encode(password), true));
-        authorityRepository.save(new UserAuthority(user.getName(), "default"));
+        authorityRepository.save(new UserAuthority(user, "default"));
         return user;
     }
 

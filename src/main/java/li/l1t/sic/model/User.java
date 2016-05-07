@@ -4,9 +4,13 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a user.
@@ -27,6 +31,9 @@ public class User {
     @Length(min = 60, max = 60)
     private String password;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<UserAuthority> authorities = new ArrayList<>();
+
     private boolean enabled;
 
     public User() {}
@@ -35,6 +42,14 @@ public class User {
         this.name = name;
         this.password = password;
         this.enabled = enabled;
+    }
+
+    public List<UserAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(List<UserAuthority> authorities) {
+        this.authorities = authorities;
     }
 
     public String getName() {
