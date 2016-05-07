@@ -12,13 +12,13 @@
 <!--/*@thymesVar id="person" type="li.l1t.sic.model.Person"*/-->
 <!--/*@thymesVar id="quote" type="li.l1t.sic.model.Quote"*/-->
 
-<span th:if="${quote == null}">
-    Zitat nicht gefunden.
-</span>
-
-<div th:if="${quote != null}">
-    <div>
-        <span th:text="${quote.getText()}"></span> <!-- TODO -->
+<div>
+    <div class="sic-quote sic-print-quote">
+        <p th:text="${quote.getText()}"></p> <!-- TODO -->
+        <footer>
+            <span th:text="${person.getName()}"></span>,
+            <span th:text="${quote.getSubText()}"></span>
+        </footer>
     </div>
 </div>
 </body>

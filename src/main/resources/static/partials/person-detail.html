@@ -60,7 +60,9 @@
                                     ng-click="detailCtrl.edit(quote)">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </button>
-                            <a class="btn btn-xs btn-info" title="Zitat drucken...">
+                            <!--suppress HtmlUnknownTarget -->
+                            <a class="btn btn-xs btn-info" title="Zitat drucken..."
+                            ng-href="/secure/print/quote/by/id/{{quote.id}}">
                                 <span class="glyphicon glyphicon-print"></span>
                             </a>
                         </div>

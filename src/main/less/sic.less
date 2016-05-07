@@ -147,6 +147,21 @@ body {
 }
 
 /* printing */
-@media print {
-  //TODO
+.sic-print-quote {
+  margin-top: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
+
+  p {
+    .h1();
+  }
+
+  footer {
+    .text-right();
+    font-size: @font-size-h3;
+
+    *, &, &:before {
+      color: @gray !important; //Bootstrap has #000 !important for @media print ._.
+    }
+  }
 }
