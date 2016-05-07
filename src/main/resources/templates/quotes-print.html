@@ -1,0 +1,24 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Zitate drucken | sic</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8"/>
+    <!--suppress HtmlUnknownTarget -->
+    <link rel="stylesheet" href="/css/sic.min.css"/>
+</head>
+
+<body onload="window.print();">
+<!--/*@thymesVar id="quotes" type="java.util.List<li.l1t.sic.model.Quote>"*/-->
+
+<div>
+    <div class="sic-quote sic-print-quote pagebreak-after" th:each="quote : ${quotes}">
+        <p><span th:text="${quote.getText()}"></span></p>
+        <footer>
+            <span th:text="${quote.getPerson().getName()}"></span><span th:if="${quote.hasSubText()}">,</span>
+            <span th:text="${quote.getSubText()}"></span>
+        </footer>
+    </div>
+</div>
+</body>
+</html>

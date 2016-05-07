@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Controller for serving sic's main template, aka, the AngularJS client.
  *
@@ -39,5 +43,15 @@ public class LandingController {
             model.addAttribute("person", person);
         }
         return "quote-print";
+    }
+
+    @RequestMapping(value = "/secure/print/quotes/by/ids/{ids}", method = RequestMethod.GET)
+    public String teacherPrint(Model model, @PathVariable int[] ids) {
+        List<Quote> quotes = Arrays.stream(ids)
+                .mapToObj(quoteService::findById)
+                .collect(Collectors.toList());
+
+        model.addAttribute("quotes", quotes);
+        return "quotes-print";
     }
 }
