@@ -32,7 +32,7 @@ public class QuoteService {
     private QuoteVoteService voteService;
 
     public List<Quote> getAllQuotesByPerson(Person person) {
-        return quoteRepository.findAllByPersonOrderByVoteCount(person).stream()
+        return quoteRepository.findAllByPersonOrderByVoteCountDesc(person).stream()
                 .filter(q -> !q.isDeleted())
                 .collect(Collectors.toList());
     }
