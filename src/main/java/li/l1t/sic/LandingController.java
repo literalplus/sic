@@ -35,7 +35,7 @@ public class LandingController {
     }
 
     @RequestMapping(value = "/secure/print/quote/by/id/{id}", method = RequestMethod.GET)
-    public String teacherPrint(Model model, @PathVariable("id") int id) {
+    public String quotePrintSingle(Model model, @PathVariable("id") int id) {
         Quote quote = quoteService.findById(id);
         model.addAttribute("quote", quote);
         if (quote != null){
@@ -46,11 +46,18 @@ public class LandingController {
     }
 
     @RequestMapping(value = "/secure/print/quotes/by/ids/{ids}", method = RequestMethod.GET)
-    public String teacherPrint(Model model, @PathVariable int[] ids) {
+    public String quotesPrintById(Model model, @PathVariable int[] ids) {
         List<Quote> quotes = Arrays.stream(ids)
                 .mapToObj(quoteService::findById)
                 .collect(Collectors.toList());
 
+        model.addAttribute("quotes", quotes);
+        return "quotes-print";
+    }
+
+    @RequestMapping(value = "/secure/print/quotes/by/rating/{rating}", method = RequestMethod.GET)
+    public String quotesPrintByRating(Model model, @PathVariable int rating) {
+        List<Quote> quotes = quoteService.findAllWithVoteCountGreaterThan(rating);
         model.addAttribute("quotes", quotes);
         return "quotes-print";
     }

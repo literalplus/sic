@@ -116,4 +116,10 @@ public class QuoteService {
         save(quote);
         voteService.deleteAllVotesOn(quote);
     }
+
+    public List<Quote> findAllWithVoteCountGreaterThan(int voteCount) {
+        return quoteRepository.findByVoteCountGreaterThan(voteCount)
+                .stream().filter(quote -> !quote.isDeleted())
+                .collect(Collectors.toList());
+    }
 }

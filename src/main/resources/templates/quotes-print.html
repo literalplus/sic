@@ -11,6 +11,10 @@
 <body onload="window.print();">
 <!--/*@thymesVar id="quotes" type="java.util.List<li.l1t.sic.model.Quote>"*/-->
 
+<div class="h1 text-danger" th:if="${quotes.isEmpty()}">
+    Keine Zitate zu diesen Kriterien gefunden. Sorry!
+</div>
+
 <div>
     <div class="sic-quote sic-print-quote pagebreak-after" th:each="quote : ${quotes}">
         <p><span th:text="${quote.getText()}"></span></p>

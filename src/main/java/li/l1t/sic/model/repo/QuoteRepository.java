@@ -15,7 +15,6 @@ import java.util.List;
  */
 @Repository
 public interface QuoteRepository extends CrudRepository<Quote, Integer> {
-    List<Quote> findAllByPerson(Person person);
-
     List<Quote> findAllByPersonOrderByVoteCount(Person person);
+    List<Quote> findByVoteCountGreaterThan(int parameter);
 }
