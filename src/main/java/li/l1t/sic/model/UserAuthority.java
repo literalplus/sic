@@ -1,7 +1,5 @@
 package li.l1t.sic.model;
 
-import org.hibernate.validator.constraints.Length;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -22,8 +20,6 @@ public class UserAuthority {
     @Id
     private int id;
 
-    @Valid
-    @Length(max = 50, min = 3)
     @JoinColumn(name = "username")
     @ManyToOne
     private User user;
