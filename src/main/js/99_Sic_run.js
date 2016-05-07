@@ -34,6 +34,7 @@ tingoApp.controller('LoginController', LoginController);
 tingoApp.controller('RegisterController', RegisterController);
 tingoApp.controller('NavDataController', NavDataController);
 tingoApp.controller('PersonNameModalController', PersonNameModalController);
+tingoApp.controller('SelectionController', SelectionController);
 tingoApp.constant('AUTH_EVENTS', {
     login_success: 'auth-login-success',
     login_failure: 'auth-login-failure',

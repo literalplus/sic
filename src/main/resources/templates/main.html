@@ -54,8 +54,31 @@
         </div> <!-- /.container-fluid -->
     </nav>
 
-    <div class="container main-container" ui-view="">
+    <div class="container main-container" ng-controller="SelectionController as selCtrl">
+        <div ng-show="selCtrl.hasSelection()">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Du hast
+                    <ng-pluralize count="selCtrl.getSelectedQuoteIds().length"
+                                          when="{'one': 'ein Zitat', 'other': '{} Zitate'}">
+                    </ng-pluralize>
+                    zum Drucken ausgew&auml;hlt.
+                </div>
+                <div class="panel-body">
+                    Du kannst jetzt weitere Zitate ausw&auml;hlen, auch von anderen Personen.
+                    Wenn du fertig bist, klicke hier:
+                    <a class="btn btn-primary"
+                       ng-href="/secure/print/quotes/by/ids/{{selCtrl.getQuoteString()}}">
+                        Alle drucken
+                    </a>
+                    <button class="btn btn-danger" ng-click="selCtrl.resetSelection()">Abbrechen</button>
+                </div>
+            </div>
+        </div>
 
+        <div ui-view="">
+            <!-- state templates are inserted here -->
+        </div>
     </div>
 
     <noscript>
@@ -80,7 +103,7 @@
     <script src="webjars/angular-ui-bootstrap/1.1.1-1/ui-bootstrap.min.js"></script>
     <script src="webjars/angular-ui-bootstrap/1.1.1-1/ui-bootstrap-tpls.min.js"></script>
     <script src="webjars/bootswatch-paper/3.3.5+4/js/bootstrap.min.js"></script>
-    <script src="webjars/underscorejs/1.8.3/underscore-min.js"></script>
+    <script src="webjars/lodash/4.11.1/lodash.min.js"></script>
     <!--suppress HtmlUnknownTarget -->
     <script src="js/sic.js"></script>
 

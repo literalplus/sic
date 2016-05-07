@@ -65,6 +65,10 @@
                             ng-href="/secure/print/quote/by/id/{{quote.id}}" target="_blank">
                                 <span class="glyphicon glyphicon-print"></span>
                             </a>
+                            <button class="btn btn-xs btn-success" title="Zitat zum Drucken ausw&auml;hlen"
+                               ng-click="selCtrl.select(quote)" ng-class="{'active': selCtrl.isSelected(quote)}">
+                                <span class="glyphicon glyphicon-asterisk"></span>
+                            </button>
                         </div>
                         <div class="btn-group" ng-show="!!quote.editing">
                             <button class="btn btn-primary btn-xs"
