@@ -4,6 +4,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.sql.Timestamp;
@@ -15,6 +16,7 @@ import java.util.Date;
  * @author <a href="http://xxyy.github.io/">xxyy</a>
  * @since 2016-05-07
  */
+@MappedSuperclass
 public class BaseEntity {
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
