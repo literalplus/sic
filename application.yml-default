@@ -7,5 +7,11 @@ spring:
     username: sic
     password: my-very-secure-password
 sic:
+  # Secret code needed to register a new account
   registerSecret: my-secret
+  # Additional HTML to add to the footer
   footerText: 'This service is provided by Aperture Laboratories. Change this text in application.yml.'
+  # Whether to enable random pranks and trolls on the users
+  enablePranks: false
+  # The YouTube id of the 'introductory' video
+  videoUrl: 'cRpdIrq7Rbo'

@@ -1,7 +1,8 @@
-var HomeController = ['$http', '$rootScope', 'AuthService',
-    function ($http, $rootScope, AuthService) {
+var HomeController = ['$http', '$rootScope', 'AuthService', '$sce',
+    function ($http, $rootScope, AuthService, $sce) {
         var ctrl = this;
         this.people = {};
+        this.videoUrl = null;
 
         AuthService.runWhenAuthenticated(function () {
             $http.get('/api/person/list')
@@ -13,6 +14,12 @@ var HomeController = ['$http', '$rootScope', 'AuthService',
                     }
 
                     ctrl.people = data;
+                });
+            $http.get('/api/prank/video/url')
+                .then(function (response) {
+                    if (!!response.data.showVideo) {
+                        ctrl.videoUrl = $sce.trustAsResourceUrl(response.data.url);
+                    }
                 });
         });
     }];

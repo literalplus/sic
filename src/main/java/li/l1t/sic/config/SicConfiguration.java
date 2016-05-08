@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 public class SicConfiguration {
     private String registerSecret;
     private String footerText;
+    private String videoUrl;
+    private boolean enablePranks;
 
     public String getRegisterSecret() {
         return registerSecret;
@@ -29,5 +31,21 @@ public class SicConfiguration {
 
     public void setFooterText(String footerText) {
         this.footerText = footerText;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
+    public boolean isEnablePranks() {
+        return enablePranks;
+    }
+
+    public void setEnablePranks(boolean enablePranks) {
+        this.enablePranks = enablePranks;
     }
 }

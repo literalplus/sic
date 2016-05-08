@@ -16,6 +16,38 @@
 </div>
 
 <div ng-show="isAuthenticated()">
+    <div class="panel panel-primary" ng-if="homeCtrl.videoUrl">
+        <div class="panel-heading">
+            <h3 class="panel-title">Einf&uuml;hrung</h3>
+        </div>
+        <div class="panel-body">
+            <p>
+                Willkommen bei [sic!], {{::auth.getUserName()}}! W&auml;hle unten eine
+                Person aus, zu der du Zitate ansehen willst. Wenn dir eines gef&auml;llt,
+                kannst du es mit dem Plusknopf upvoten. Wenn du es drucken willst, gibt
+                es auch einen Knopf zum Drucken. Mit dem Plus rechts neben den Lehrernamen
+                kannst du deine eigenen Zitate hinzuf&uuml;gen!
+            </p>
+            <p>
+                Hier noch ein informatives Video zur Verwendung der Plattform:
+            </p>
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item"
+                        ng-src="{{homeCtrl.videoUrl}}"
+                        allowfullscreen>
+                </iframe>
+            </div>
+            <p>
+                #BlameXaverNahler
+            </p>
+            <p>
+                It's just a prank!! Keine Angst, du wirst dieses Video
+                nie wieder zu Gesicht bekommen m&uuml;ssen, sobald du
+                die Seite neu l&auml;dst.
+            </p>
+        </div>
+    </div>
+
     <div class="jumbotron">
         <h1>Zitatmanagement wie nie zuvor</h1>
         <p>

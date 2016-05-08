@@ -34,6 +34,10 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<UserAuthority> authorities = new ArrayList<>();
 
+    @Column(name = "seen_video")
+    private boolean seenVideo = false;
+
+    @Column
     private boolean enabled;
 
     public User() {}
@@ -77,5 +81,16 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    /**
+     * @return whether this user has seen an "introductory" video "explaining the app" (a troll)
+     */
+    public boolean hasSeenVideo() {
+        return seenVideo;
+    }
+
+    public void setSeenVideo(boolean seenVideo) {
+        this.seenVideo = seenVideo;
     }
 }

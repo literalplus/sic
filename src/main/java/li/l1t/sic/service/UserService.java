@@ -50,8 +50,20 @@ public class UserService {
 
     public User fromPrincipal(Principal principal) {
         Validate.notNull(principal, "principal");
-        User user = userRepository.findByName(principal.getName());
+        User user = fromPrincipalNullable(principal);
         Validate.notNull(user, "No user found for name " + principal.getName());
         return user;
+    }
+
+    public User fromPrincipalNullable(Principal principal) {
+        if(principal == null) {
+            return null;
+        }
+        return userRepository.findByName(principal.getName());
+    }
+
+    public void setSeenVideo(User user, boolean seenVideo) {
+        user.setSeenVideo(seenVideo);
+        userRepository.save(user);
     }
 }
