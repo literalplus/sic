@@ -44,12 +44,8 @@ public class PrankController {
 
     @RequestMapping("/api/prank/video/reset")
     public String resetVideoPrank(Principal principal) {
-        User user = userService.fromPrincipalNullable(principal);
-        if (user != null){
-            userService.setSeenVideo(user, false);
-            return "You asked for it.";
-        } else {
-            return "I do not know you";
-        }
+        User user = userService.fromPrincipal(principal);
+        userService.setSeenVideo(user, false);
+        return "You asked for it.";
     }
 }
