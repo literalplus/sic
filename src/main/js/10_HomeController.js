@@ -4,7 +4,7 @@ var HomeController = ['$http', '$rootScope', 'AuthService', '$sce',
         this.people = {};
         this.videoUrl = null;
 
-        AuthService.runWhenAuthenticated(function () {
+        if (AuthService.isAuthenticated()) {
             $http.get('/api/person/list')
                 .success(function (data) {
                     for (var i = 0; i < data.length; i++) {
@@ -21,5 +21,5 @@ var HomeController = ['$http', '$rootScope', 'AuthService', '$sce',
                         ctrl.videoUrl = $sce.trustAsResourceUrl(response.data.url);
                     }
                 });
-        });
+        }
     }];
