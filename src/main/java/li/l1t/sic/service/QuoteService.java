@@ -122,4 +122,8 @@ public class QuoteService {
                 .stream().filter(quote -> !quote.isDeleted())
                 .collect(Collectors.toList());
     }
+
+    public long getQuoteCount() {
+        return quoteRepository.count();
+    }
 }

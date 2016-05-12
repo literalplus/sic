@@ -54,6 +54,9 @@
             Willkommen bei sic, dem zentralisierten Zitatservice! Bitte w&auml;hle unten eine
             Person aus, zu der du Zitate ansehen m&ouml;chtest.
         </p>
+        <p ng-show="!!homeCtrl.quotesCount">
+            Wir haben momentan {{::homeCtrl.quotesCount}} Zitate gespeichert.
+        </p>
     </div>
 
     <div class="container-fluid sic-person-tile-container">

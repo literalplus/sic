@@ -3,8 +3,13 @@ var HomeController = ['$http', '$rootScope', 'AuthService', '$sce',
         var ctrl = this;
         this.people = {};
         this.videoUrl = null;
+        this.quotesCount = null;
 
         if (AuthService.isAuthenticated()) {
+            $http.get('/api/quotes/count')
+                .then(function (response) {
+                    ctrl.quotesCount = response.data.count;
+                });
             $http.get('/api/person/list')
                 .success(function (data) {
                     for (var i = 0; i < data.length; i++) {

@@ -4,8 +4,8 @@ import li.l1t.sic.model.Person;
 import li.l1t.sic.model.Quote;
 import li.l1t.sic.model.dto.QuoteDto;
 import li.l1t.sic.model.dto.QuotesDto;
-import li.l1t.sic.service.QuoteService;
 import li.l1t.sic.service.PersonService;
+import li.l1t.sic.service.QuoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -63,5 +65,10 @@ public class QuoteController {
         Quote quote = quoteService.toEntity(quoteDto);
         quoteService.delete(quote);
         return quoteService.toDto(quote, user);
+    }
+
+    @RequestMapping(value = "/api/quotes/count")
+    public Map<String, Long> quotesCount() {
+        return Collections.singletonMap("count", quoteService.getQuoteCount());
     }
 }
