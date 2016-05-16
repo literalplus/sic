@@ -19,77 +19,7 @@
         </h1>
 
         <div class="container-fluid">
-            <div ng-repeat="quote in detailCtrl.getQuotes()" uib-tooltip-template="'/partials/detail-tooltip.html'"
-                 tooltip-is-open="!!quote.editing || !!quote.hovering" tooltip-trigger="none"
-                 ng-mouseenter="quote.hovering = true" ng-mouseleave="quote.hovering = false">
-
-                <blockquote class="sic-quote" ng-class-even="'blockquote-reverse'">
-                    <p>
-                        <span ng-hide="!!quote.editing">{{quote.text}}</span>
-                        <textarea ng-show="!!quote.editing" ng-model="quote.text"
-                                  placeholder="Zitat eingeben..."></textarea>
-                    </p>
-                    <footer>
-                        {{detailCtrl.getPerson().name}},
-                        <span ng-hide="!!quote.editing">
-                            {{quote.subText}}
-                        </span>
-                        <input type="text" ng-show="!!quote.editing"
-                               ng-model="quote.subText" placeholder="Subtext">
-                        <abbr title="Summe der Up/Downvotes f&uuml;r dieses Zitat">
-
-                        </abbr>
-                        &bull;
-                        <div class="btn-group" ng-hide="!!quote.editing">
-                            <button class="btn btn-primary btn-xs" title="+1 f&uuml;r dieses Zitat"
-                                    ng-class="{'active': detailCtrl.isUpVote(quote)}"
-                                    ng-click="detailCtrl.setVote(quote, 1)">
-                                +
-                            </button>
-                            <button class="btn btn-default btn-xs" disabled>
-                                {{detailCtrl.getFriendlyVoteCount(quote)}}
-                            </button>
-                            <button class="btn btn-danger btn-xs" title="-1 f&uuml;r dieses Zitat"
-                                    ng-class="{'active': detailCtrl.isDownVote(quote)}"
-                                    ng-click="detailCtrl.setVote(quote, -1)">
-                                -
-                            </button>
-                        </div>
-                        <div class="btn-group" ng-hide="!!quote.editing">
-                            <button class="btn btn-warning btn-xs" title="Zitat bearbeiten"
-                                    ng-click="detailCtrl.edit(quote)">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                            </button>
-                            <!--suppress HtmlUnknownTarget -->
-                            <a class="btn btn-xs btn-info" title="Zitat drucken..."
-                            ng-href="/secure/print/quote/by/id/{{quote.id}}" target="_blank">
-                                <span class="glyphicon glyphicon-print"></span>
-                            </a>
-                            <button class="btn btn-xs btn-success" title="Zitat zum Drucken ausw&auml;hlen"
-                               ng-click="selCtrl.select(quote)" ng-class="{'active': selCtrl.isSelected(quote)}">
-                                <span class="glyphicon glyphicon-asterisk"></span>
-                            </button>
-                        </div>
-                        <div class="btn-group" ng-show="!!quote.editing">
-                            <button class="btn btn-primary btn-xs"
-                                    title="&Auml;nderungen speichern"
-                                    ng-click="detailCtrl.save(quote)">
-                                <span class="glyphicon glyphicon-ok"></span>
-                            </button>
-                            <button class="btn btn-xs btn-warning"
-                                    title="&Auml;nderungen verwerfen"
-                                    ng-click="detailCtrl.unedit(quote)">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </button>
-                            <button class="btn btn-xs btn-danger"
-                                    title="Zitat endg&uuml;ltig l&ouml;schen (!)"
-                                    ng-click="detailCtrl.delete(quote)">
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </button>
-                        </div>
-                    </footer>
-                </blockquote>
-            </div>
+            <sic-quote ng-repeat="quote in detailCtrl.getQuotes()" ></sic-quote>
         </div>
     </div> <!-- /isFetched() -->
 </div> <!-- /isAuthenticated() -->
