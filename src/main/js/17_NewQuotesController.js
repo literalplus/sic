@@ -3,7 +3,7 @@ var NewQuotesController = ['QuoteListService', '$http',
         var ctrl = this;
         var currentPage = 0;
         var previousLength = -1;
-        this.disableScroll = false;
+        this.disableScroll = true;
         this.quotes = [];
 
         angular.extend(ctrl, QuoteListService);
@@ -19,12 +19,14 @@ var NewQuotesController = ['QuoteListService', '$http',
         };
 
         this.fetchPage = function (pageId) {
+            ctrl.disableScroll = true;
             $http.get('/api/quote/latest/page/' + pageId)
                 .then(function (response) {
                     QuoteListService.quotes = _.concat(
                         QuoteListService.quotes, response.data
                     );
                     previousLength = response.data.length;
+                    ctrl.disableScroll = false;
                 }, function (response) {
                     console.warn('Could not fetch latest quotes:');
                     console.warn(response);
