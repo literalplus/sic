@@ -68,7 +68,7 @@ tingoApp.factory('PersonDetailService', ['$http', '$location', '$uibModal',
         };
 
         detailService.new = function () {
-            detailService.quotes.push({
+            detailService.quotes.unshift({
                 text: '',
                 personId: detailService.person.id,
                 editing: true,
