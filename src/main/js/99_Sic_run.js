@@ -36,6 +36,7 @@ tingoApp.controller('NavDataController', NavDataController);
 tingoApp.controller('PersonNameModalController', PersonNameModalController);
 tingoApp.controller('SelectionController', SelectionController);
 tingoApp.controller('NewQuotesController', NewQuotesController);
+tingoApp.controller('BestQuotesController', BestQuotesController);
 tingoApp.constant('AUTH_EVENTS', {
     login_success: 'auth-login-success',
     login_failure: 'auth-login-failure',

@@ -18,5 +18,6 @@ import java.util.List;
 public interface QuoteRepository extends CrudRepository<Quote, Integer> {
     List<Quote> findAllByPersonOrderByVoteCountDesc(Person person);
     List<Quote> findByVoteCountGreaterThan(int parameter);
+    List<Quote> findByVoteCountGreaterThan(int parameter, Pageable pageable);
     List<Quote> findAllByOrderByLastUpdatedDesc(Pageable pageable);
 }

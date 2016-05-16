@@ -41,7 +41,7 @@ public class QuoteController {
 
     @RequestMapping("/api/quote/by/person/{personId}")
     public QuotesDto byPersonId(@PathVariable int personId,
-                                 @RequestParam(defaultValue = "0") int limit,
+                                @RequestParam(defaultValue = "0") int limit,
                                 Principal user) {
         Person person = personService.getById(personId);
 
@@ -49,7 +49,7 @@ public class QuoteController {
                 .map((quote) -> quoteService.toDto(quote, user))
                 .collect(Collectors.toList());
 
-        if(limit > 0) { //If we have a limit, apply it; Using streams for easier API (no bounds checking necessary)
+        if (limit > 0){ //If we have a rating, apply it; Using streams for easier API (no bounds checking necessary)
             fields = fields.stream().limit(limit).collect(Collectors.toList());
         }
 
@@ -58,9 +58,19 @@ public class QuoteController {
 
     @RequestMapping("/api/quote/latest/page/{pageId}")
     public List<QuoteDto> latest(@PathVariable int pageId,
-                            @RequestParam(defaultValue = "5") int pageSize) {
+                                 @RequestParam(defaultValue = "5") int pageSize) {
         Validate.exclusiveBetween(4, 51, pageSize, "invalid pageSize, must be 4<x<51");
         return quoteService.findLatest(pageId, pageSize).stream()
+                .map(quoteService::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @RequestMapping("/api/quote/best/gt/{rating}/page/{pageId}")
+    public List<QuoteDto> best(@PathVariable int pageId,
+                               @RequestParam(defaultValue = "5") int pageSize,
+                               @PathVariable int rating) {
+        Validate.exclusiveBetween(4, 51, pageSize, "invalid pageSize, must be 4<x<51");
+        return quoteService.findAllWithVoteCountGreaterThan(rating, pageId, pageSize).stream()
                 .map(quoteService::toDto)
                 .collect(Collectors.toList());
     }

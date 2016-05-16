@@ -38,6 +38,7 @@ public class QuoteService {
 
     /**
      * Maps a model quote to a Data Transfer Object.
+     *
      * @param quote the quote to map
      * @return a DTO containing copied data from the quote
      */
@@ -47,8 +48,9 @@ public class QuoteService {
 
     /**
      * Maps a model quote to a Data Transfer Object.
+     *
      * @param quote the quote to map
-     * @param user the user to use for user-specific properties
+     * @param user  the user to use for user-specific properties
      * @return a DTO containing copied data from the quote
      */
     public QuoteDto toDto(Quote quote, Principal user) {
@@ -61,7 +63,7 @@ public class QuoteService {
         quoteDto.setCreatorName(quote.getCreator() == null ? "???" : quote.getCreator().getName());
         quoteDto.setSubText(quote.getSubText());
         quoteDto.setVoteCount(quote.getVoteCount());
-        if(user != null) {
+        if (user != null){
             quoteDto.setOwnVote(voteService.findVoteStatus(quote, user));
         }
         return quoteDto;
@@ -82,7 +84,7 @@ public class QuoteService {
 
     public Quote findById(int quoteId) {
         Quote quote = quoteRepository.findOne(quoteId);
-        if(quote == null || quote.isDeleted()) {
+        if (quote == null || quote.isDeleted()){
             throw new QuoteNotFoundException(quoteId);
         } else {
             return quote;
@@ -118,6 +120,13 @@ public class QuoteService {
 
     public List<Quote> findAllWithVoteCountGreaterThan(int voteCount) {
         return quoteRepository.findByVoteCountGreaterThan(voteCount);
+    }
+
+    public List<Quote> findAllWithVoteCountGreaterThan(int voteCount, int pageId, int pageSize) {
+        return quoteRepository.findByVoteCountGreaterThan(
+                voteCount,
+                new PageRequest(pageId, pageSize)
+        );
     }
 
     public long getQuoteCount() {
