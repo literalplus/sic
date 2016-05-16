@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Service handling sic quotes, specifically finding quotes by person,
@@ -34,9 +33,7 @@ public class QuoteService {
     private QuoteVoteService voteService;
 
     public List<Quote> getAllQuotesByPerson(Person person) {
-        return quoteRepository.findAllByPersonOrderByVoteCountDesc(person).stream()
-                .filter(q -> !q.isDeleted())
-                .collect(Collectors.toList());
+        return quoteRepository.findAllByPersonOrderByVoteCountDesc(person);
     }
 
     /**
@@ -120,9 +117,7 @@ public class QuoteService {
     }
 
     public List<Quote> findAllWithVoteCountGreaterThan(int voteCount) {
-        return quoteRepository.findByVoteCountGreaterThan(voteCount)
-                .stream().filter(quote -> !quote.isDeleted())
-                .collect(Collectors.toList());
+        return quoteRepository.findByVoteCountGreaterThan(voteCount);
     }
 
     public long getQuoteCount() {
@@ -131,8 +126,6 @@ public class QuoteService {
 
     public List<Quote> findLatest(int pageId, int pageSize) {
         Pageable pageable = new PageRequest(pageId, pageSize);
-        return quoteRepository.findAllByOrderByLastUpdatedDesc(pageable)
-                .stream().filter(quote -> !quote.isDeleted())
-                .collect(Collectors.toList());
+        return quoteRepository.findAllByOrderByLastUpdatedDesc(pageable);
     }
 }

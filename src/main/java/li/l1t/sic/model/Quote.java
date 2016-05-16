@@ -1,5 +1,6 @@
 package li.l1t.sic.model;
 
+import org.hibernate.annotations.Where;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Column;
@@ -18,6 +19,7 @@ import javax.validation.Valid;
  */
 @Entity
 @Table(name = "sic_quote")
+@Where(clause = "deleted=0")
 public class Quote extends IdentifiableEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "person_id", updatable = false, nullable = false)
