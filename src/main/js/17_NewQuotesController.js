@@ -30,7 +30,6 @@ var NewQuotesController = ['QuoteListService', '$http',
                 }, function (response) {
                     console.warn('Could not fetch latest quotes:');
                     console.warn(response);
-                    alert('Fehler beim Laden der Zitate!');
                 });
         };
 
