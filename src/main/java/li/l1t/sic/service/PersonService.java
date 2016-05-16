@@ -4,6 +4,7 @@ import li.l1t.sic.exception.PersonNotFoundException;
 import li.l1t.sic.model.Person;
 import li.l1t.sic.model.dto.PersonDto;
 import li.l1t.sic.model.repo.PersonRepository;
+import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,5 +48,10 @@ public class PersonService {
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         return dto;
+    }
+
+    public Person findByDto(PersonDto personDto) {
+        Validate.notNull(personDto, "personDto");
+        return getById(personDto.getId());
     }
 }

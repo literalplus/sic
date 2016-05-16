@@ -1,0 +1,8 @@
+<div class="jumbotron">
+    <h1>Neue Zitate</h1>
+</div>
+
+<div class="container-fluid">
+    <sic-quote ng-repeat="quote in detailCtrl.getQuotes()"
+               infinite-scroll="detailCtrl.nextPage()" infinite-scroll-distance="0"></sic-quote>
+</div>

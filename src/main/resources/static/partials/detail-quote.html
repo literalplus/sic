@@ -9,15 +9,12 @@
                                   placeholder="Zitat eingeben..."></textarea>
         </p>
         <footer>
-            {{detailCtrl.getPerson().name}},
+            {{quote.person.name}},
                         <span ng-hide="!!quote.editing">
                             {{quote.subText}}
                         </span>
             <input type="text" ng-show="!!quote.editing"
                    ng-model="quote.subText" placeholder="Subtext">
-            <abbr title="Summe der Up/Downvotes f&uuml;r dieses Zitat">
-
-            </abbr>
             &bull;
             <div class="btn-group" ng-hide="!!quote.editing">
                 <button class="btn btn-primary btn-xs" title="+1 f&uuml;r dieses Zitat"
@@ -25,7 +22,8 @@
                         ng-click="detailCtrl.setVote(quote, 1)">
                     +
                 </button>
-                <button class="btn btn-default btn-xs" disabled>
+                <button class="btn btn-default btn-xs" disabled
+                        title="Summe der Up-/Downvotes f&uuml;r dieses Zitat">
                     {{detailCtrl.getFriendlyVoteCount(quote)}}
                 </button>
                 <button class="btn btn-danger btn-xs" title="-1 f&uuml;r dieses Zitat"

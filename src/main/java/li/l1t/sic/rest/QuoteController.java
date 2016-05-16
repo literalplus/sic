@@ -6,6 +6,7 @@ import li.l1t.sic.model.dto.QuoteDto;
 import li.l1t.sic.model.dto.QuotesDto;
 import li.l1t.sic.service.PersonService;
 import li.l1t.sic.service.QuoteService;
+import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,8 +40,8 @@ public class QuoteController {
     }
 
     @RequestMapping("/api/quote/by/person/{personId}")
-    public QuotesDto byPersonId(@PathVariable("personId") int personId,
-                                 @RequestParam(name = "limit", defaultValue = "0") int limit,
+    public QuotesDto byPersonId(@PathVariable int personId,
+                                 @RequestParam(defaultValue = "0") int limit,
                                 Principal user) {
         Person person = personService.getById(personId);
 
@@ -53,6 +54,15 @@ public class QuoteController {
         }
 
         return new QuotesDto(personService.toDto(person), fields);
+    }
+
+    @RequestMapping("/api/quote/latest/page/{pageId}")
+    public List<QuoteDto> latest(@PathVariable int pageId,
+                            @RequestParam(defaultValue = "5") int pageSize) {
+        Validate.exclusiveBetween(4, 51, pageSize, "invalid pageSize, must be 4<x<51");
+        return quoteService.findLatest(pageId, pageSize).stream()
+                .map(quoteService::toDto)
+                .collect(Collectors.toList());
     }
 
     @RequestMapping(value = "/api/quote/save", method = RequestMethod.POST)

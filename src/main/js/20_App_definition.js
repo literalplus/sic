@@ -1,1 +1,1 @@
-var tingoApp = angular.module('tingo', ['ui.router', 'ui.bootstrap', 'ngCookies']);
+var tingoApp = angular.module('tingo', ['ui.router', 'ui.bootstrap', 'ngCookies', 'infinite-scroll']);

@@ -8,7 +8,7 @@ package li.l1t.sic.model.dto;
  */
 public class QuoteDto {
     private int id;
-    private int personId;
+    private PersonDto person;
     private String text;
     private String creatorName;
     private String subText;
@@ -31,12 +31,12 @@ public class QuoteDto {
         this.text = text;
     }
 
-    public int getPersonId() {
-        return personId;
+    public PersonDto getPerson() {
+        return person;
     }
 
-    public void setPersonId(int personId) {
-        this.personId = personId;
+    public void setPerson(PersonDto person) {
+        this.person = person;
     }
 
     public String getCreatorName() {

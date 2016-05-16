@@ -7,6 +7,8 @@ import li.l1t.sic.model.dto.QuoteDto;
 import li.l1t.sic.model.repo.QuoteRepository;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
@@ -58,7 +60,7 @@ public class QuoteService {
         QuoteDto quoteDto = new QuoteDto();
         quoteDto.setId(quote.getId());
         quoteDto.setText(quote.getText());
-        quoteDto.setPersonId(quote.getPerson().getId());
+        quoteDto.setPerson(personService.toDto(quote.getPerson()));
         quoteDto.setCreatorName(quote.getCreator() == null ? "???" : quote.getCreator().getName());
         quoteDto.setSubText(quote.getSubText());
         quoteDto.setVoteCount(quote.getVoteCount());
@@ -76,7 +78,7 @@ public class QuoteService {
     }
 
     public Quote toEntity(QuoteDto dto) {
-        Person person = personService.getById(dto.getPersonId());
+        Person person = personService.findByDto(dto.getPerson());
         Quote quote = new Quote(dto.getId(), person);
         return adaptFromDto(quote, dto);
     }
@@ -99,7 +101,7 @@ public class QuoteService {
     }
 
     public Quote save(QuoteDto spec, Principal user) {
-        Person person = personService.getById(spec.getPersonId());
+        Person person = personService.findByDto(spec.getPerson());
         Quote quote = quoteRepository.findOne(spec.getId());
         if (quote == null){
             quote = new Quote(person);
@@ -125,5 +127,12 @@ public class QuoteService {
 
     public long getQuoteCount() {
         return quoteRepository.count();
+    }
+
+    public List<Quote> findLatest(int pageId, int pageSize) {
+        Pageable pageable = new PageRequest(pageId, pageSize);
+        return quoteRepository.findAllByOrderByLastUpdatedDesc(pageable)
+                .stream().filter(quote -> !quote.isDeleted())
+                .collect(Collectors.toList());
     }
 }

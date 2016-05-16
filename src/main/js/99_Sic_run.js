@@ -35,6 +35,7 @@ tingoApp.controller('RegisterController', RegisterController);
 tingoApp.controller('NavDataController', NavDataController);
 tingoApp.controller('PersonNameModalController', PersonNameModalController);
 tingoApp.controller('SelectionController', SelectionController);
+tingoApp.controller('NewQuotesController', NewQuotesController);
 tingoApp.constant('AUTH_EVENTS', {
     login_success: 'auth-login-success',
     login_failure: 'auth-login-failure',
@@ -42,3 +43,4 @@ tingoApp.constant('AUTH_EVENTS', {
     auth_status: 'auth-status-change',
     logout: 'auth-logout'
 });
+tingoApp.value('THROTTLE_MILLISECONDS', 500); //infinite-scroll

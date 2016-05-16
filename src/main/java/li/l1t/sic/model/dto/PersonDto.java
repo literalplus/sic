@@ -10,7 +10,7 @@ public class PersonDto {
     private int id;
     private String name;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 

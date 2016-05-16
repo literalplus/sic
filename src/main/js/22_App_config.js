@@ -41,6 +41,12 @@ tingoApp.config(['$stateProvider', '$urlRouterProvider', '$urlMatcherFactoryProv
                 templateUrl: 'partials/person-detail.html',
                 controller: 'PersonDetailController',
                 controllerAs: 'detailCtrl'
+            })
+            .state('newquotes', {
+                url: '/quotes/latest',
+                templateUrl: 'partials/new-quotes.html',
+                controller: 'NewQuotesController',
+                controllerAs: 'detailCtrl'
             });
 
         //Prevent Spring Security from displaying auth dialog, we control authentication ourselves!
