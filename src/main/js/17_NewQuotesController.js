@@ -3,6 +3,7 @@ var NewQuotesController = ['QuoteListService', '$http',
         var ctrl = this;
         var currentPage = 0;
         var previousLength = -1;
+        this.disableScroll = false;
         this.quotes = [];
 
         angular.extend(ctrl, QuoteListService);
@@ -36,6 +37,7 @@ var NewQuotesController = ['QuoteListService', '$http',
                 ctrl.fetchPage(++currentPage);
             } else {
                 console.info('Probably at the end!');
+                ctrl.disableScroll = true;
             }
         };
         
