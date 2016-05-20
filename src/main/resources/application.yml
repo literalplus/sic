@@ -17,3 +17,12 @@ flyway:
   # migrate if we don't have a baseline defined, i.e. Flyway has never run on that database.
   baseline-on-migrate: true
   encoding: UTF-8
+sic:
+  # Secret code needed to register a new account
+    registerSecret: my-secret
+    # Additional HTML to add to the footer
+    footerText: 'This service is provided by Aperture Laboratories. Change this text in application.yml.'
+    # Whether to enable random pranks and trolls on the users
+    enablePranks: false
+    # The YouTube id of the 'introductory' video
+    videoUrl: 'cRpdIrq7Rbo'
