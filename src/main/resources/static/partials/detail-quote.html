@@ -9,7 +9,7 @@
                                   placeholder="Zitat eingeben..."></textarea>
         </p>
         <footer>
-            {{quote.person.name}}<span ng-hide="!quote.subText">,</span>
+            {{quote.person.name}}<span ng-hide="!quote.subText && !quote.editing">,</span>
             <span ng-hide="!!quote.editing">{{quote.subText}}</span>
             <input type="text" ng-show="!!quote.editing"
                    ng-model="quote.subText" placeholder="Subtext">
