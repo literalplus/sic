@@ -5,7 +5,7 @@ tingoApp.config(['$stateProvider', '$urlRouterProvider', '$urlMatcherFactoryProv
 
         $stateProvider
             .state('home', {
-                url: '/',
+                url: '/?guestCode',
                 templateUrl: 'partials/home.html',
                 controller: 'HomeController',
                 controllerAs: 'homeCtrl',

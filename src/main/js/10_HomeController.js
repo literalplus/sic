@@ -1,5 +1,5 @@
-var HomeController = ['$http', '$rootScope', 'AuthService', '$sce',
-    function ($http, $rootScope, AuthService, $sce) {
+var HomeController = ['$http', '$rootScope', 'AuthService', '$sce', '$stateParams', 'AUTH_EVENTS', '$window',
+    function ($http, $rootScope, AuthService, $sce, $stateParams, AUTH_EVENTS, $window) {
         var ctrl = this;
         this.people = {};
         this.videoUrl = null;
@@ -26,5 +26,16 @@ var HomeController = ['$http', '$rootScope', 'AuthService', '$sce',
                         ctrl.videoUrl = $sce.trustAsResourceUrl(response.data.url);
                     }
                 });
+        }
+
+        if (!!$stateParams.guestCode) {
+            console.info("Authenticating using guest code...");
+            $rootScope.$on(AUTH_EVENTS.login_success, function () {
+                if (AuthService.isGuest()) {
+                    console.info("Authenticated using guest code!");
+                    $window.location = '/'; //force redirect, to drop guestCode from URL 
+                }
+            });
+            AuthService.login({password: $stateParams.guestCode});
         }
     }];
