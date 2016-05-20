@@ -51,7 +51,7 @@ public class TokenHandler {
 
     public String createGuestToken() {
         return Jwts.builder()
-                .setSubject("*guest")
+                .setSubject(GuestUser.NAME)
                 .signWith(SignatureAlgorithm.HS256, tokenGenerator.getToken())
                 .setExpiration(Date.from(LocalDateTime.now().plusDays(2).atZone(ZoneId.systemDefault()).toInstant()))
                 .compact();
