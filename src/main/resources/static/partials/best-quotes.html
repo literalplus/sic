@@ -1,16 +1,17 @@
 <div class="jumbotron">
     <h1>Beste Zitate</h1>
     <form class="form-inline row">
-        <label for="minRating" class="col-xs-4">
-            Zeige nur Zitate mit Bewertung besser als:
-        </label>
-        <input type="number" title="Zeige nur Zitate, deren Bewertung gr&ouml;&szlig;er ist als"
-               ng-model="detailCtrl.minRating" step="1" pattern="\-?\d+"
-               ng-change="detailCtrl.resetQuotes()" class="form-control input-sm col-xs-1"
-               id="minRating">
-        <span class="col-xs-1"><!-- spacer --></span>
-        <a title="Drucken" class="btn btn-success col-xs-2"
-        ng-href="{{'/secure/print/quotes/by/rating/' + detailCtrl.minRating}}">
+        <div class="form-group">
+            <label for="minRating">
+                Zeige nur Zitate mit Bewertung besser als:
+            </label>
+            <input type="number" title="Zeige nur Zitate, deren Bewertung gr&ouml;&szlig;er ist als"
+                   ng-model="detailCtrl.minRating" step="1" pattern="\-?\d+"
+                   ng-change="detailCtrl.resetQuotes()" class="form-control input-sm"
+                   id="minRating">
+        </div>
+        <a title="Drucken" class="btn btn-success"
+           ng-href="{{'/secure/print/quotes/by/rating/' + detailCtrl.minRating}}">
             <span class="glyphicon glyphicon-print"></span> Drucken
         </a>
     </form>
