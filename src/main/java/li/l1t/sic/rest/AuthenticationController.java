@@ -73,7 +73,7 @@ public class AuthenticationController {
 
     @RequestMapping(value = "/auth/guest", method = RequestMethod.POST)
     public Map<String, String> guestAuth(@RequestBody AuthenticationDto request) {
-        if (configuration.getGuestCode().equals(request.getPassword())) {
+        if (configuration.getGuestCode().equalsIgnoreCase(request.getPassword())) {
             return Collections.singletonMap("token", tokenHandler.createGuestToken());
         } else {
             throw new AuthException("Invalider Zugangscode!");
