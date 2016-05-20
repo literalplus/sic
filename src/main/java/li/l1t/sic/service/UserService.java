@@ -42,6 +42,9 @@ public class UserService {
             throw new JsonPropagatingException("Sorry, dein Benutzername darf nicht mit einem Sternchen beginnen.");
         }
         if (!sicConfiguration.getRegisterSecret().equalsIgnoreCase(registerSecret)){
+            if(sicConfiguration.getGuestCode().equalsIgnoreCase(registerSecret)) {
+                throw new JsonPropagatingException("Pssst, falsches Formular! Das ist ein Zugangscode, kein Geheimcode.");
+            }
             throw new JsonPropagatingException("Falscher Geheimcode!");
         }
 

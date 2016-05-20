@@ -59,7 +59,7 @@ public class AuthenticationController {
     public Map<String, String> login(@RequestBody AuthenticationDto request) {
         Authentication authentication =
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
-        Principal user = null;
+        Principal user;
         try {
             user = authenticationManager.authenticate(authentication);
         } catch (BadCredentialsException e) {
@@ -73,7 +73,7 @@ public class AuthenticationController {
 
     @RequestMapping(value = "/auth/guest", method = RequestMethod.POST)
     public Map<String, String> guestAuth(@RequestBody AuthenticationDto request) {
-        if (configuration.getGuestCode().equals(request.getPassword())){
+        if (configuration.getGuestCode().equals(request.getPassword())) {
             return Collections.singletonMap("token", tokenHandler.createGuestToken());
         } else {
             throw new AuthException("Invalider Zugangscode!");
