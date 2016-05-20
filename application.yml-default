@@ -19,7 +19,7 @@ sic:
   guestCode: ''
   # additional navbar links
   # - caption: Link text
-  #   url:     target URL
+  #   url:     target URL (state:// for Angular UI ui-sref)
   navbarLinks:
     - caption: 'Neue Zitate'
       url: 'state://newquotes'
