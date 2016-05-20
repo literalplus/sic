@@ -75,6 +75,9 @@ public class AuthenticationController {
     public Map<String, String> guestAuth(@RequestBody AuthenticationDto request) {
         if (configuration.getGuestCode().equalsIgnoreCase(request.getPassword())) {
             return Collections.singletonMap("token", tokenHandler.createGuestToken());
+        } else if(configuration.getRegisterSecret().equalsIgnoreCase(request.getPassword())) {
+            throw new AuthException("Du bist zu Größerem bestimmt! Das ist ein VIP-Code, " +
+                    "du kannst dir damit rechts einen Account anlegen.");
         } else {
             throw new AuthException("Invalider Zugangscode!");
         }
