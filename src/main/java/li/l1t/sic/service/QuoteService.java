@@ -135,6 +135,6 @@ public class QuoteService {
 
     public List<Quote> findLatest(int pageId, int pageSize) {
         Pageable pageable = new PageRequest(pageId, pageSize);
-        return quoteRepository.findAllByOrderByLastUpdatedDesc(pageable);
+        return quoteRepository.findAllByOrderByCreationDateDesc(pageable);
     }
 }
