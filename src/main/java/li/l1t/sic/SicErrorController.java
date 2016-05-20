@@ -1,12 +1,13 @@
 package li.l1t.sic;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.ErrorAttributes;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -18,9 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class SicErrorController implements ErrorController {
     private static final String ERROR_PATH = "/error";
-
-    @Autowired
-    private ErrorAttributes errorAttributes;
+    private static final Logger LOGGER = LoggerFactory.getLogger(SicErrorController.class);
 
     @Override
     public String getErrorPath() {
@@ -29,15 +28,20 @@ public class SicErrorController implements ErrorController {
 
     @RequestMapping(value = ERROR_PATH)
     public String errorHtml(HttpServletRequest request, Model model) {
-        Object errCodeObj = request.getAttribute("javax.servlet.error.status_code");
+        Object errCodeObj = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
         int errorCode = errCodeObj == null ? 0 : (int) errCodeObj;
         model.addAttribute("errorCode", errCodeObj);
-        model.addAttribute("errorType", request.getAttribute("javax.servlet.error.exception"));
+        Object obj = request.getAttribute(RequestDispatcher.ERROR_EXCEPTION);
+        if (obj instanceof Throwable) {
+            Throwable throwable = ((Throwable) obj);
+            LOGGER.info(request.getRequestURI() + " // " + throwable.getClass() + " - " + throwable.getMessage());
+            LOGGER.debug("Stack trace", throwable);
+            model.addAttribute("errorType", throwable.getClass().getSimpleName());
+        }
 
-        switch(errorCode) {
+        switch (errorCode) {
             case 401:
                 return "error/401";
-            case 0:
             default:
                 return "error/generic";
         }

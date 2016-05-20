@@ -32,7 +32,7 @@ public class Quote extends IdentifiableEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creator_name", updatable = false)
-    private User creator;
+    private RegisteredUser creator;
 
     @Column(nullable = false, columnDefinition = "VARCHAR(255)", name = "sub_text")
     @Valid
@@ -68,11 +68,11 @@ public class Quote extends IdentifiableEntity {
         this.text = text;
     }
 
-    public User getCreator() {
+    public RegisteredUser getCreator() {
         return creator;
     }
 
-    public void setCreator(User creator) {
+    public void setCreator(RegisteredUser creator) {
         this.creator = creator;
     }
 

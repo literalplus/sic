@@ -1,5 +1,6 @@
 package li.l1t.sic.rest;
 
+import li.l1t.sic.model.GuestUser;
 import li.l1t.sic.model.Quote;
 import li.l1t.sic.service.QuoteService;
 import li.l1t.sic.service.QuoteVoteService;
@@ -25,6 +26,7 @@ public class QuoteVoteController {
 
     @RequestMapping(value = "/api/quote/by/id/{id}/vote/up")
     public int upVote(@PathVariable("id") int quoteId, Principal user) {
+        GuestUser.validateNotGuest(user);
         Quote quote = quoteService.findById(quoteId);
         quoteVoteService.setVote(quote, user, true);
         return quote.getVoteCount();
@@ -32,6 +34,7 @@ public class QuoteVoteController {
 
     @RequestMapping(value = "/api/quote/by/id/{id}/vote/down")
     public int downVote(@PathVariable("id") int quoteId, Principal user) {
+        GuestUser.validateNotGuest(user);
         Quote quote = quoteService.findById(quoteId);
         quoteVoteService.setVote(quote, user, false);
         return quote.getVoteCount();
@@ -39,6 +42,7 @@ public class QuoteVoteController {
 
     @RequestMapping(value = "/api/quote/by/id/{id}/vote/reset")
     public int resetVote(@PathVariable("id") int quoteId, Principal user) {
+        GuestUser.validateNotGuest(user);
         Quote quote = quoteService.findById(quoteId);
         quoteVoteService.unsetVote(quote, user);
         return quote.getVoteCount();

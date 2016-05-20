@@ -1,6 +1,7 @@
 package li.l1t.sic.service;
 
 import li.l1t.sic.exception.JsonPropagatingException;
+import li.l1t.sic.model.GuestUser;
 import li.l1t.sic.model.Quote;
 import li.l1t.sic.model.QuoteVote;
 import li.l1t.sic.model.repo.QuoteVoteRepository;
@@ -26,6 +27,9 @@ public class QuoteVoteService {
     private QuoteService quoteService;
 
     public int findVoteStatus(Quote quote, Principal principal) {
+        if(GuestUser.isGuest(principal)) {
+            return 0;
+        }
         QuoteVote vote = findVote(quote, principal);
         if(vote == null) {
             return 0;
@@ -36,7 +40,7 @@ public class QuoteVoteService {
 
     public QuoteVote findVote(Quote quote, Principal principal) {
         return repository.findOne(new QuoteVote.QuoteVoteId(
-                userService.fromPrincipal(principal),
+                userService.fromRegistered(principal),
                 quote
         ));
     }
@@ -44,7 +48,7 @@ public class QuoteVoteService {
     public QuoteVote setVote(Quote quote, Principal principal, boolean isUpvote) {
         QuoteVote vote = findVote(quote, principal);
         if (vote == null){
-            vote = new QuoteVote(quote, userService.fromPrincipal(principal), isUpvote);
+            vote = new QuoteVote(quote, userService.fromRegistered(principal), isUpvote);
         } else if (vote.isUpvote() == isUpvote){
             throw new JsonPropagatingException("Already voted on that quote!");
         }

@@ -9,15 +9,15 @@ import li.l1t.sic.exception.JsonPropagatingException;
  * @since 2016-02-14
  */
 public class ErrorDto {
-    private final String errorMessage;
+    private final String message;
     private final String exceptionName;
 
-    public ErrorDto(String errorMessage) {
-        this(errorMessage, null);
+    public ErrorDto(String message) {
+        this(message, null);
     }
 
     public ErrorDto(Exception exception) {
-        this.errorMessage = exception.getMessage();
+        this.message = exception.getMessage();
         if(exception instanceof JsonPropagatingException && exception.getCause() != null) {
             this.exceptionName = exception.getCause().getClass().getSimpleName();
         } else {
@@ -25,13 +25,13 @@ public class ErrorDto {
         }
     }
 
-    public ErrorDto(String errorMessage, String exceptionName) {
-        this.errorMessage = errorMessage;
+    public ErrorDto(String message, String exceptionName) {
+        this.message = message;
         this.exceptionName = exceptionName;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public String getMessage() {
+        return message;
     }
 
     public String getExceptionName() {

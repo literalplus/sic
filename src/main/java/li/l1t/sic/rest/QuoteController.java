@@ -1,5 +1,6 @@
 package li.l1t.sic.rest;
 
+import li.l1t.sic.model.GuestUser;
 import li.l1t.sic.model.Person;
 import li.l1t.sic.model.Quote;
 import li.l1t.sic.model.dto.QuoteDto;
@@ -77,11 +78,13 @@ public class QuoteController {
 
     @RequestMapping(value = "/api/quote/save", method = RequestMethod.POST)
     public QuoteDto save(@RequestBody QuoteDto quote, Principal user) {
+        GuestUser.validateNotGuest(user);
         return quoteService.toDto(quoteService.save(quote, user), user);
     }
 
     @RequestMapping(value = "/api/quote/delete", method = RequestMethod.POST)
     public QuoteDto deleteById(@RequestBody QuoteDto quoteDto, Principal user) {
+        GuestUser.validateNotGuest(user);
         Quote quote = quoteService.toEntity(quoteDto);
         quoteService.delete(quote);
         return quoteService.toDto(quote, user);

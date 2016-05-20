@@ -15,3 +15,5 @@ sic:
   enablePranks: false
   # The YouTube id of the 'introductory' video
   videoUrl: 'cRpdIrq7Rbo'
+  # access code for guest (readonly) access
+  guestCode: ''

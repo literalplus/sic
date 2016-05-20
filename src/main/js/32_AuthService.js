@@ -5,7 +5,6 @@ tingoApp.factory('AuthService', ['$http', '$rootScope', '$location', 'AUTH_EVENT
         authService.credentials = {};
         authService.username = null;
         authService.error = false;
-        authService.errorMessage = "Falscher Benutzername oder falsches Passwort!";
         authService.authChecked = false;
         authService.authRequested = false;
 
@@ -19,7 +18,14 @@ tingoApp.factory('AuthService', ['$http', '$rootScope', '$location', 'AUTH_EVENT
         };
 
         var authenticate = function (credentials, callback) {
-            $http.post('auth/login', credentials).then(function (response) {
+            var url;
+            if (credentials.hasOwnProperty('username')) {
+                url = 'auth/login';
+            } else {
+                url = 'auth/guest';
+            }
+
+            $http.post(url, credentials).then(function (response) {
                 authService.authChecked = true;
                 if (response.data.token) {
                     setAuth(response.data.token);
@@ -30,10 +36,10 @@ tingoApp.factory('AuthService', ['$http', '$rootScope', '$location', 'AUTH_EVENT
                 if (callback) {
                     callback(authService.authenticated, response.data);
                 }
-            }, function () {
+            }, function (response) {
                 resetAuth();
                 if (callback) {
-                    callback(false, {});
+                    callback(false, response.data);
                 }
             });
         };
@@ -52,7 +58,7 @@ tingoApp.factory('AuthService', ['$http', '$rootScope', '$location', 'AUTH_EVENT
                         }
                     } else {
                         $rootScope.$broadcast(AUTH_EVENTS.login_failure, data);
-                        $location.path('/login');
+                        //$location.path('/login');
                     }
                 }
             );
@@ -70,13 +76,16 @@ tingoApp.factory('AuthService', ['$http', '$rootScope', '$location', 'AUTH_EVENT
                 authService.login(credentials);
             }, function (response) {
                 authService.error = true;
-                authService.errorMessage = response.data.errorMessage;
                 $rootScope.$broadcast(AUTH_EVENTS.register_failure, response.data);
             });
         };
 
         authService.isAuthenticated = function () {
             return TokenService.hasToken() && authService.authenticated;
+        };
+        
+        authService.isGuest = function () {
+            return authService.username === '*guest';
         };
 
         authService.runWhenAuthenticated = function (callback) { //this is kind of deprecated, use #onAuthChange(...)
@@ -93,7 +102,7 @@ tingoApp.factory('AuthService', ['$http', '$rootScope', '$location', 'AUTH_EVENT
             }
 
             if (onLogout) {
-                if(!authService.isAuthenticated()) {
+                if (!authService.isAuthenticated()) {
                     onLogout();
                 }
                 $rootScope.$on(AUTH_EVENTS.logout, onLogout);

@@ -16,6 +16,7 @@ public class SicConfiguration {
     private String footerText;
     private String videoUrl;
     private boolean enablePranks;
+    private String guestCode;
 
     public String getRegisterSecret() {
         return registerSecret;
@@ -47,5 +48,13 @@ public class SicConfiguration {
 
     public void setEnablePranks(boolean enablePranks) {
         this.enablePranks = enablePranks;
+    }
+
+    public String getGuestCode() {
+        return guestCode;
+    }
+
+    public void setGuestCode(String guestCode) {
+        this.guestCode = guestCode;
     }
 }

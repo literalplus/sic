@@ -105,7 +105,7 @@ public class QuoteService {
         if (quote == null){
             quote = new Quote(person);
             if (user != null){
-                quote.setCreator(userService.fromPrincipal(user));
+                quote.setCreator(userService.fromRegistered(user));
             }
         }
         adaptFromDto(quote, spec);

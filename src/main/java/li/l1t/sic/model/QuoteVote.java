@@ -29,7 +29,7 @@ public class QuoteVote extends BaseEntity {
 
     }
 
-    public QuoteVote(Quote quote, User user, boolean isUpvote) {
+    public QuoteVote(Quote quote, RegisteredUser user, boolean isUpvote) {
         this.id = new QuoteVoteId(user, quote);
         this.isUpvote = isUpvote;
     }
@@ -38,7 +38,7 @@ public class QuoteVote extends BaseEntity {
         return id;
     }
 
-    public User getUser() {
+    public RegisteredUser getUser() {
         return getId().getUser();
     }
 
@@ -62,7 +62,7 @@ public class QuoteVote extends BaseEntity {
     public static class QuoteVoteId implements Serializable {
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "user_name", updatable = false)
-        private User user;
+        private RegisteredUser user;
 
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "quote_id", updatable = false)
@@ -72,16 +72,16 @@ public class QuoteVote extends BaseEntity {
 
         }
 
-        public QuoteVoteId(User user, Quote quote) {
+        public QuoteVoteId(RegisteredUser user, Quote quote) {
             this.user = user;
             this.quote = quote;
         }
 
-        public User getUser() {
+        public RegisteredUser getUser() {
             return user;
         }
 
-        public void setUser(User user) {
+        public void setUser(RegisteredUser user) {
             this.user = user;
         }
 

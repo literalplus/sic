@@ -58,6 +58,13 @@
             Willkommen bei sic, dem zentralisierten Zitatservice! Bitte w&auml;hle unten eine
             Person aus, zu der du Zitate ansehen m&ouml;chtest.
         </p>
+        <p ng-hide="auth.guest()">
+            Du bist privilegiert und hast deswegen Schreibrechte! Yay!
+        </p>
+        <p ng-show="auth.guest()">
+            Hallo, Fremder! Falls es technische Probleme mit dem Service gibt, kannst du
+            <a href="https://github.com/xxyy/sic/issues">hier</a> Hilfe erhalten.
+        </p>
         <p ng-show="!!homeCtrl.quotesCount">
             Wir haben momentan {{homeCtrl.quotesCount}} Zitate gespeichert.
         </p>
@@ -76,7 +83,7 @@
                 </div>
             </a>
         </div>
-        <a ui-sref="person.detail({id: 'new'})">
+        <a ui-sref="person.detail({id: 'new'})" ng-hide="auth.guest()">
             <div class="col-xs-12 col-md-4 sic-person-tile-wrapper">
                 <div class="sic-person-tile sic-new-person-tile text-center">
                     <span>+</span>

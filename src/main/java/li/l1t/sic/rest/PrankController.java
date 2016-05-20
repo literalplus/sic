@@ -1,7 +1,7 @@
 package li.l1t.sic.rest;
 
 import li.l1t.sic.config.SicConfiguration;
-import li.l1t.sic.model.User;
+import li.l1t.sic.model.RegisteredUser;
 import li.l1t.sic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +27,7 @@ public class PrankController {
     @RequestMapping("/api/prank/video/url")
     public Map<String, Object> checkVideoPrank(Principal principal) {
         Map<String, Object> result = new HashMap<>();
-        User user = userService.fromPrincipalNullable(principal);
+        RegisteredUser user = userService.fromRegisteredNullable(principal);
         boolean showVideo = false;
         if (configuration.isEnablePranks() && user != null && !user.hasSeenVideo()){
             result.put("url",
@@ -44,7 +44,7 @@ public class PrankController {
 
     @RequestMapping("/api/prank/video/reset")
     public String resetVideoPrank(Principal principal) {
-        User user = userService.fromPrincipal(principal);
+        RegisteredUser user = userService.fromRegistered(principal);
         userService.setSeenVideo(user, false);
         return "You asked for it.";
     }

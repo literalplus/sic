@@ -1,96 +1,43 @@
 package li.l1t.sic.model;
 
-import org.hibernate.validator.constraints.Length;
+import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 /**
- * Represents a user.
+ * Represents a user of the application which may be registered or an authenticated guest.
  *
  * @author <a href="http://xxyy.github.io/">xxyy</a>
- * @since 2016-02-21
+ * @since 2016-05-20
  */
-@Entity
-@Table(name = "sic_user")
-public class User {
-    @Valid
-    @Length(min = 2, max = 20)
-    @Column(name = "username")
-    @Id
-    private String name;
-
-    @Valid
-    @Length(min = 60, max = 60)
-    private String password;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private List<UserAuthority> authorities = new ArrayList<>();
-
-    @Column(name = "seen_video")
-    private boolean seenVideo = false;
-
-    @Column
-    private boolean enabled;
-
-    public User() {}
-
-    public User(String name, String password, boolean enabled) {
-        this.name = name;
-        this.password = password;
-        this.enabled = enabled;
-    }
-
-    public List<UserAuthority> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(List<UserAuthority> authorities) {
-        this.authorities = authorities;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+public interface User {
+    /**
+     * @return the collection of authorities this user has been granted
+     */
+    Collection<? extends GrantedAuthority> getAuthorities();
 
     /**
-     * @return the hashed password chosen by this user
+     * @return this user's name, if they are registered
      */
-    public String getPassword() {
-        return password;
-    }
+    String getName();
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    /**
+     * @return the hashed password chosen by this user, if they are registered, null otherwise
+     */
+    String getPassword();
 
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
+    /**
+     * @return whether this user's account is enabled
+     */
+    boolean isEnabled();
 
     /**
      * @return whether this user has seen an "introductory" video "explaining the app" (a troll)
      */
-    public boolean hasSeenVideo() {
-        return seenVideo;
-    }
+    boolean hasSeenVideo();
 
-    public void setSeenVideo(boolean seenVideo) {
-        this.seenVideo = seenVideo;
-    }
+    /**
+     * @return whether this user is registered, or an authenticated guest
+     */
+    boolean isRegistered();
 }

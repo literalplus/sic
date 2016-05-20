@@ -1,5 +1,7 @@
 package li.l1t.sic.model;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,27 +18,27 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "sic_authority")
-public class UserAuthority {
+public class UserAuthority implements GrantedAuthority {
     @Id
     private int id;
 
     @JoinColumn(name = "username")
     @ManyToOne
-    private User user;
+    private RegisteredUser user;
 
     @Column
     private String authority;
 
-    public UserAuthority(User user, String authority) {
+    public UserAuthority(RegisteredUser user, String authority) {
         this.user = user;
         this.authority = authority;
     }
 
-    public User getUser() {
+    public RegisteredUser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(RegisteredUser user) {
         this.user = user;
     }
 

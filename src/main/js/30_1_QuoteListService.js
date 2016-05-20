@@ -17,7 +17,7 @@ tingoApp.factory('QuoteListService', ['$http',
                 }, function (response) {
                     console.warn('Couldn\'t save fields: ');
                     console.warn(response);
-                    alert('Fehler beim Speichern: ' + response.data.errorMessage);
+                    alert('Fehler beim Speichern: ' + response.data.message);
                 });
         };
 
@@ -62,7 +62,7 @@ tingoApp.factory('QuoteListService', ['$http',
                 }, function (response) {
                     console.warn('Couldn\'t change quote vote: ');
                     console.warn(response);
-                    alert('Fehler beim Voten: ' + response.data.errorMessage);
+                    alert('Fehler beim Voten: ' + response.data.message);
                 });
         };
 
@@ -73,7 +73,7 @@ tingoApp.factory('QuoteListService', ['$http',
                 }, function (response) {
                     console.warn('Couldn\'t delete quote: ');
                     console.warn(response);
-                    alert('Fehler beim Löschen: ' + response.data.errorMessage);
+                    alert('Fehler beim Löschen: ' + response.data.message);
                 });
         };
 

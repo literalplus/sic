@@ -50,7 +50,9 @@
                 </p>
 
                 <p class="navbar-text pull-right" ng-show="isAuthenticated()" ng-cloak="">
-                    o/ {{auth.getUserName()}} <a href="" ng-click="auth.logout()">Logout</a>
+                    <span ng-hide="auth.guest()">o/ {{auth.getUserName()}}</span>
+                    <span ng-show="auth.guest()">Sei gegr&uuml;&szlig;t, Fremder!</span>
+                    <a href="" ng-click="auth.logout()">Logout</a>
                 </p>
             </div> <!-- /.navbar-collapse -->
         </div> <!-- /.container-fluid -->

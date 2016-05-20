@@ -23,7 +23,7 @@ tingoApp.factory('PersonDetailService', ['$http', '$location', '$uibModal', 'Quo
                                 QuoteListService.quotes = [];
                                 QuoteListService.setFetched(true);
                             }, function (response) {
-                                alert('Fehler beim Erstellen der Person!');
+                                alert('Fehler beim Erstellen der Person:' + response.data.errorMessage);
                                 console.error(response);
                             });
                     }, function () {

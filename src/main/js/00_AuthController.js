@@ -2,31 +2,32 @@ var AuthController = ['$rootScope', 'AuthService', 'AUTH_EVENTS',
     function ($rootScope, AuthService, AUTH_EVENTS) {
         var auth = this;
         this.credentials = {};
+        this.guestCredentials = {};
         this.loginError = null;
         this.registerError = null;
 
         this.login = function () {
             AuthService.login(auth.credentials);
         };
-
-        this.logout = function () {
-            AuthService.logout();
+        
+        this.guestLogin = function () {
+            AuthService.login(auth.guestCredentials);
         };
 
         this.register = function () {
             AuthService.register(auth.credentials);
         };
 
-        this.getUserName = function () {
-            return AuthService.getUserName();
-        };
+        this.logout = AuthService.logout;
+        this.getUserName = AuthService.getUserName;
+        this.guest = AuthService.isGuest;
 
-        $rootScope.$on(AUTH_EVENTS.login_failure, function () {
-            auth.loginError = 'Falscher Benutzername oder falsches Passwort!';
+        $rootScope.$on(AUTH_EVENTS.login_failure, function (evt, data) {
+            auth.loginError = !!data ? data.message : 'Fehler beim Einloggen!';
         });
 
         $rootScope.$on(AUTH_EVENTS.register_failure, function (evt, data) {
-            auth.registerError = !!data ? data.errorMessage : 'Fehler beim Registrieren!';
+            auth.registerError = !!data ? data.message : 'Fehler beim Registrieren!';
         });
 
         $rootScope.$on(AUTH_EVENTS.login_success, function () {

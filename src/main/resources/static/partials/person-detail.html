@@ -10,7 +10,7 @@
     <div ng-show="detailCtrl.isFetched()">
         <h1>
             {{detailCtrl.getPerson().name}}
-            <small ng-show="detailCtrl.getPerson().id">
+            <small ng-hide="auth-guest()">
                 <span class="sic-person-actions">
                     <a ng-click="detailCtrl.new()"
                        title="Neues Zitat" class="glyphicon glyphicon-plus"></a>

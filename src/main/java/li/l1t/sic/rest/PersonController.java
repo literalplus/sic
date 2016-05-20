@@ -1,5 +1,6 @@
 package li.l1t.sic.rest;
 
+import li.l1t.sic.model.GuestUser;
 import li.l1t.sic.model.dto.PersonDto;
 import li.l1t.sic.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -42,7 +44,8 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/api/person/new", method = RequestMethod.POST)
-    public PersonDto newPerson(@RequestBody PersonDto personDto) {
+    public PersonDto newPerson(@RequestBody PersonDto personDto, Principal user) {
+        GuestUser.validateNotGuest(user);
         return personService.toDto(personService.newPerson(personDto));
     }
 }
