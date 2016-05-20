@@ -3,6 +3,9 @@ package li.l1t.sic.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Stores configuration values for the whole application.
  *
@@ -17,6 +20,7 @@ public class SicConfiguration {
     private String videoUrl;
     private boolean enablePranks;
     private String guestCode;
+    private List<NavbarLink> navbarLinks;
 
     public String getRegisterSecret() {
         return registerSecret;
@@ -56,5 +60,16 @@ public class SicConfiguration {
 
     public void setGuestCode(String guestCode) {
         this.guestCode = guestCode;
+    }
+
+    public List<NavbarLink> getNavbarLinks() {
+        if(navbarLinks == null) {
+            navbarLinks = new ArrayList<>();
+        }
+        return navbarLinks;
+    }
+
+    public void setNavbarLinks(List<NavbarLink> navbarLinks) {
+        this.navbarLinks = navbarLinks;
     }
 }

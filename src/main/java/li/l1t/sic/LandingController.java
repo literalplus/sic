@@ -31,6 +31,7 @@ public class LandingController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String main(Model model) {
         model.addAttribute("footerText", configuration.getFooterText());
+        model.addAttribute("navbarLinks", configuration.getNavbarLinks());
         return "main";
     }
 
