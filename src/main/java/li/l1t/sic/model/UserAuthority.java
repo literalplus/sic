@@ -1,5 +1,6 @@
 package li.l1t.sic.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -23,6 +24,7 @@ public class UserAuthority {
     @ManyToOne
     private User user;
 
+    @Column
     private String authority;
 
     public UserAuthority(User user, String authority) {
