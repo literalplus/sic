@@ -27,3 +27,6 @@ sic:
       url: 'state://bestquotes'
     - caption: 'Source'
       url: 'https://github.com/xxyy/sic'
+  statsdEnabled: false
+  statsdHost: 'localhost'
+  statsdPort: '8125'

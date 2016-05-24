@@ -32,3 +32,6 @@ sic:
   #navbarLinks:
   #  - caption: Link text
   #    url:     target URL
+  statsdEnabled: false
+  statsdHost: 'localhost'
+  statsdPort: '8125'

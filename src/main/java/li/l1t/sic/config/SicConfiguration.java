@@ -21,6 +21,9 @@ public class SicConfiguration {
     private boolean enablePranks;
     private String guestCode;
     private List<NavbarLink> navbarLinks;
+    private boolean statsdEnabled;
+    private String statsdHost;
+    private int statsdPort;
 
     public String getRegisterSecret() {
         return registerSecret;
@@ -71,5 +74,29 @@ public class SicConfiguration {
 
     public void setNavbarLinks(List<NavbarLink> navbarLinks) {
         this.navbarLinks = navbarLinks;
+    }
+
+    public boolean isStatsdEnabled() {
+        return statsdEnabled;
+    }
+
+    public void setStatsdEnabled(boolean statsdEnabled) {
+        this.statsdEnabled = statsdEnabled;
+    }
+
+    public String getStatsdHost() {
+        return statsdHost;
+    }
+
+    public void setStatsdHost(String statsdHost) {
+        this.statsdHost = statsdHost;
+    }
+
+    public int getStatsdPort() {
+        return statsdPort;
+    }
+
+    public void setStatsdPort(int statsdPort) {
+        this.statsdPort = statsdPort;
     }
 }
