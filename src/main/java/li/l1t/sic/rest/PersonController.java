@@ -4,6 +4,7 @@ import li.l1t.sic.model.GuestUser;
 import li.l1t.sic.model.dto.PersonDto;
 import li.l1t.sic.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.metrics.CounterService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,16 +24,15 @@ import java.util.stream.StreamSupport;
  */
 @RestController
 public class PersonController {
-    private final PersonService personService;
-
     @Autowired
-    PersonController(PersonService personService) {
-        this.personService = personService;
-    }
+    private PersonService personService;
+    @Autowired
+    private CounterService counterService;
 
 
     @RequestMapping("/api/person/list")
     public List<PersonDto> personList() {
+        counterService.increment("controllers.person.listAccess");
         return StreamSupport.stream(personService.getAllPeople().spliterator(), false)
                 .map(personService::toDto)
                 .collect(Collectors.toList());
