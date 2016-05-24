@@ -61,6 +61,7 @@ public class SicStarter {
                     configuration.getStatsdPort()
             );
         } else {
+            LOGGER.info("Not using Statsd.");
             return new JmxMetricWriter(new MBeanExporter()); //don't know what else to do
         }
     }
