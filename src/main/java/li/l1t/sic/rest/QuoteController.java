@@ -9,6 +9,7 @@ import li.l1t.sic.service.PersonService;
 import li.l1t.sic.service.QuoteService;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.metrics.dropwizard.DropwizardMetricServices;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,14 +32,12 @@ import java.util.stream.StreamSupport;
  */
 @RestController
 public class QuoteController {
-    private final QuoteService quoteService;
-    private final PersonService personService;
-
     @Autowired
-    public QuoteController(QuoteService quoteService, PersonService personService) {
-        this.quoteService = quoteService;
-        this.personService = personService;
-    }
+    private QuoteService quoteService;
+    @Autowired
+    private PersonService personService;
+    @Autowired
+    private DropwizardMetricServices metricServices;
 
     @RequestMapping("/api/quote/by/person/{personId}")
     public QuotesDto byPersonId(@PathVariable int personId,
@@ -92,6 +91,8 @@ public class QuoteController {
 
     @RequestMapping(value = "/api/quotes/count")
     public Map<String, Long> quotesCount() {
-        return Collections.singletonMap("count", quoteService.getQuoteCount());
+        long quoteCount = quoteService.getQuoteCount();
+        metricServices.submit("auth.login.guest", quoteCount);
+        return Collections.singletonMap("count", quoteCount);
     }
 }

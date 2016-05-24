@@ -6,6 +6,7 @@ import li.l1t.sic.model.dto.AuthenticationDto;
 import li.l1t.sic.security.auth.TokenHandler;
 import li.l1t.sic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.metrics.dropwizard.DropwizardMetricServices;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,6 +39,8 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private SicConfiguration configuration;
+    @Autowired
+    private DropwizardMetricServices metricServices;
 
     @RequestMapping("/auth/status")
     public Principal user(Principal user) { //Spring throws a 401 if not logged in (explicitly only authed users in security config)
@@ -51,7 +54,13 @@ public class AuthenticationController {
 
     @RequestMapping(value = "/auth/register", method = RequestMethod.POST)
     public Map<String, Boolean> register(@RequestBody AuthenticationDto request) {
-        userService.createUser(request.getUsername(), request.getPassword(), request.getRegisterToken());
+        try {
+            userService.createUser(request.getUsername(), request.getPassword(), request.getRegisterToken());
+        } catch (Exception e) {
+            metricServices.increment("auth.register.failure");
+            throw e;
+        }
+        metricServices.increment("auth.register.success");
         return Collections.singletonMap("success", true);
     }
 
@@ -63,22 +72,30 @@ public class AuthenticationController {
         try {
             user = authenticationManager.authenticate(authentication);
         } catch (BadCredentialsException e) {
+            metricServices.increment("auth.login.failure.credentials");
             throw new AuthException("Benutzername und/oder Passwort falsch!");
         } catch (AuthenticationException e) {
+            metricServices.increment("auth.login.failure.auth");
             throw new AuthException("Fehler beim Login: " + e.getClass().getSimpleName());
+        } catch (Exception e) {
+            metricServices.increment("auth.login.failure.misc");
+            throw e;
         }
         String token = tokenHandler.createTokenForUser(user);
+        metricServices.increment("auth.login.success");
         return Collections.singletonMap("token", token);
     }
 
     @RequestMapping(value = "/auth/guest", method = RequestMethod.POST)
     public Map<String, String> guestAuth(@RequestBody AuthenticationDto request) {
         if (configuration.getGuestCode().equalsIgnoreCase(request.getPassword())) {
+            metricServices.increment("auth.login.guest.success");
             return Collections.singletonMap("token", tokenHandler.createGuestToken());
         } else if(configuration.getRegisterSecret().equalsIgnoreCase(request.getPassword())) {
             throw new AuthException("Du bist zu Größerem bestimmt! Das ist ein VIP-Code, " +
                     "du kannst dir damit rechts einen Account anlegen.");
         } else {
+            metricServices.increment("auth.login.guest.failure");
             throw new AuthException("Invalider Zugangscode!");
         }
     }
