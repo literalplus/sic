@@ -1,10 +1,14 @@
 package li.l1t.sic;
 
+import com.codahale.metrics.MetricRegistry;
 import li.l1t.sic.config.SicConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.actuate.autoconfigure.ExportMetricReader;
 import org.springframework.boot.actuate.autoconfigure.ExportMetricWriter;
 import org.springframework.boot.actuate.metrics.jmx.JmxMetricWriter;
+import org.springframework.boot.actuate.metrics.reader.MetricReader;
+import org.springframework.boot.actuate.metrics.reader.MetricRegistryMetricReader;
 import org.springframework.boot.actuate.metrics.statsd.StatsdMetricWriter;
 import org.springframework.boot.actuate.metrics.writer.MetricWriter;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,6 +28,8 @@ import org.springframework.jmx.export.MBeanExporter;
 public class SicStarter {
     @Autowired
     private SicConfiguration configuration;
+    @Autowired
+    private MetricRegistry metricRegistry;
 
     public static void main(String[] args) {
         SpringApplication.run(SicStarter.class, args).getEnvironment();
@@ -34,6 +40,12 @@ public class SicStarter {
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         converter.setJsonPrefix(")]}',\n"); //Prefix JSON to prevent it from being executed - prevents hackers from doing <script src="/api/stuff">
         return converter; //Angular strips this prefix
+    }
+
+    @Bean
+    @ExportMetricReader
+    MetricReader metricReader() {
+        return new MetricRegistryMetricReader(metricRegistry);
     }
 
     @Bean
