@@ -13,6 +13,15 @@ spring:
   datasource:
     testOnBorrow: true
     validationQuery: SELECT 1
+logging:
+    level:
+      org:
+        springframework:
+          boot:
+            actuate:
+              metrics:
+                # Log Statsd errors
+                statsd: DEBUG
 flyway:
   # migrate if we don't have a baseline defined, i.e. Flyway has never run on that database.
   baseline-on-migrate: true
