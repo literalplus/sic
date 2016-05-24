@@ -2,6 +2,8 @@ package li.l1t.sic;
 
 import com.codahale.metrics.MetricRegistry;
 import li.l1t.sic.config.SicConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.autoconfigure.ExportMetricReader;
@@ -26,6 +28,7 @@ import org.springframework.jmx.export.MBeanExporter;
 @SpringBootApplication
 @EnableConfigurationProperties
 public class SicStarter {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SicStarter.class);
     @Autowired
     private SicConfiguration configuration;
     @Autowired
@@ -52,6 +55,7 @@ public class SicStarter {
     @ExportMetricWriter
     MetricWriter metricWriter() {
         if(configuration.isStatsdEnabled()) {
+            LOGGER.info("Statsd connection: {}:{}", configuration.getStatsdHost(), configuration.getStatsdPort());
             return new StatsdMetricWriter("sic",
                     configuration.getStatsdHost(),
                     configuration.getStatsdPort()
