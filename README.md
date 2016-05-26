@@ -1,14 +1,15 @@
 # sic
 
 __sic__ is a web application built to manage quotes attributed to people. It is based on 
-[Tingo](https://github.com/xxyy/tingo), which uses technologies like AngularJS (JS is bad, I know, but this is supposed
-to be a simple and fast project), lesscss and the Spring Framework.
+[Tingo](https://github.com/xxyy/tingo), which uses technologies like AngularJS (JS is bad,
+I know, but this is supposed to be a simple and fast project), lesscss and the Spring Framework.
 
 ## What is it?
 
-Specifically, _sic_ allows anyone knowing a secret code to register, view and manage quotes. People do currently have
-to be created by an administrator, but this might change in the future. It will also provide a convenient print view
-which allows people to print quotes for displaying them on a wall or something.
+Specifically, _sic_ allows anyone knowing a secret code to register, view and manage quotes and people.
+It also provides a convenient print view which allows people to print quotes for displaying them on a
+wall or something. They can also select multiple quotes for printing into a single file or print
+all quotes with a specific rating.
 
 ## Installation
 
