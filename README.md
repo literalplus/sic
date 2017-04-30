@@ -8,7 +8,7 @@ I know, but this is supposed to be a simple and fast project), lesscss and the S
 
 Specifically, _sic_ allows anyone knowing a secret code to register, view and manage quotes and people.
 It also provides a convenient print view which allows people to print quotes for displaying them on a
-wall or something. They can also select multiple quotes for printing into a single file or print
+wall or something. (This is totally not what we did with teacher quotes) They can also select multiple quotes for printing into a single file or print
 all quotes with a specific rating.
 
 ## Installation
