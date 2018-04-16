@@ -17,7 +17,7 @@ buildscript {
 
 plugins {
     id "com.moowork.grunt" version "1.2.0"
-    id "org.springframework.boot" version "1.4.7.RELEASE"
+    id "org.springframework.boot" version "1.5.12.RELEASE"
 }
 
 group 'li.l1t'
@@ -31,7 +31,7 @@ apply plugin: 'propdeps-idea'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-ext.genResDir = "$buildDir/resources"
+ext.genResDir = "$buildDir/generated-resources"
 
 repositories {
     mavenCentral()
