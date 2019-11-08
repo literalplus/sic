@@ -1,7 +1,7 @@
 # sic
 
 __sic__ is a web application built to manage quotes attributed to people. It is based on 
-[Tingo](https://github.com/xxyy/tingo), which uses technologies like AngularJS (JS is bad,
+[Tingo](https://github.com/literalplus/tingo), which uses technologies like AngularJS (JS is bad,
 I know, but this is supposed to be a simple and fast project), lesscss and the Spring Framework.
 
 ## What is it?
@@ -16,7 +16,7 @@ all quotes with a specific rating.
 To install _sic_, you first need to build it: (assuming you're on GNU/Linux, other platforms work similarly)
 
 ````bash
-git clone https://github.com/xxyy/sic.git
+git clone https://github.com/literalplus/sic.git
 cd sic
 ./gradlew build
 cp application.yml-default application.yml
@@ -42,4 +42,4 @@ This project is licensed under the Apache License, Version 2.0. You can find a c
 
 ## Support
 
-Please, just open an issue at [GitHub](https://github.com/xxyy/sic/issues). Pull Requests are obviously welcome. 
+Please, just open an issue at [GitHub](https://github.com/literalplus/sic/issues). Pull Requests are obviously welcome. 
