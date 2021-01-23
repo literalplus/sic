@@ -36,6 +36,14 @@ or by running the `.jar` file created in the `build/libs/` directory.
 
 It will start on port 8080 by default.
 
+## Deployment
+
+```bash
+docker build -t images.lit.plus/sic:latest .
+docker push images.lit.plus/sic:latest
+helm install sic charts/sic --namespace=tingo-sic
+```
+
 ## License
 
 This project is licensed under the Apache License, Version 2.0. You can find a copy in the `LICENSE` file.

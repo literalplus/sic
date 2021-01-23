@@ -19,7 +19,7 @@ module.exports = function (grunt) {
                 },
                 build: {
                     files: {
-                        'build/resources/static/js/sic.min.js': 'src/main/js/**.js'
+                        'build/resources/generated/static/js/sic.min.js': 'src/main/js/**.js'
                     }
                 }
             },
@@ -27,14 +27,14 @@ module.exports = function (grunt) {
             concat: {
                 dist: {
                     src: 'src/main/js/**.js',
-                    dest: 'build/resources/static/js/sic.js'
+                    dest: 'build/resources/generated/static/js/sic.js'
                 }
             },
 
             less: {
                 build: {
                     files: {
-                        'build/resources/static/css/sic.css': 'src/main/less/sic.less'
+                        'build/resources/generated/static/css/sic.css': 'src/main/less/sic.less'
                     }
                 }
             },
@@ -45,7 +45,7 @@ module.exports = function (grunt) {
                 },
                 build: {
                     files: {
-                        'build/resources/static/css/sic.min.css': 'build/resources/static/css/sic.css'
+                        'build/resources/generated/static/css/sic.min.css': 'build/resources/generated/static/css/sic.css'
                     }
                 }
             },
@@ -61,12 +61,12 @@ module.exports = function (grunt) {
                     tasks: ['jshint', 'uglify']
                 }
             },
-            
+
             copy: {
                 bootstrap_fonts: {
                     expand: true,
                     src: 'node_modules/bootstrap-less/fonts/**',
-                    dest: 'build/resources/static/fonts/',
+                    dest: 'build/resources/generated/static/fonts/',
                     flatten: true
                 }
             }
