@@ -14,7 +14,7 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class IdentifiableEntity extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     public IdentifiableEntity() {

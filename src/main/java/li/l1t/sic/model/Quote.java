@@ -19,7 +19,7 @@ import javax.validation.Valid;
  */
 @Entity
 @Table(name = "sic_quote")
-@Where(clause = "deleted=0")
+@Where(clause = "deleted=false")
 public class Quote extends IdentifiableEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "person_id", updatable = false, nullable = false)
