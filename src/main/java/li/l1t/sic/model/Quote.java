@@ -61,7 +61,8 @@ public class Quote extends IdentifiableEntity {
     }
 
     public String getText() {
-        return text;
+        // Legacy newline support
+        return text.replace("\\n", "\n");
     }
 
     public void setText(String text) {
