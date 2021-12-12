@@ -12,8 +12,14 @@ spring:
     hibernate:
       ddl-auto: validate
   datasource:
-    testOnBorrow: true
-    validationQuery: SELECT 1
+    hikari:
+      connection-test-query: SELECT 1
+  flyway:
+    # migrate if we don't have a baseline defined, i.e. Flyway has never run on that database.
+    #baseline-on-migrate: true
+    encoding: UTF-8
+    #baseline-version: 0
+
 logging:
     level:
       org:
@@ -23,11 +29,7 @@ logging:
               metrics:
                 # Log Statsd errors
                 statsd: DEBUG
-flyway:
-  # migrate if we don't have a baseline defined, i.e. Flyway has never run on that database.
-  baseline-on-migrate: true
-  encoding: UTF-8
-  baseline-version: 0
+
 sic:
   # Secret code needed to register a new account
   registerSecret: my-secret
@@ -44,8 +46,12 @@ sic:
   #  - caption: Link text
   #    url:     target URL
   statsdEnabled: false
-  statsdHost: 'localhost'
-  statsdPort: '8125'
 
 management:
-  port: 8081
+  endpoints:
+    enabled-by-default: false
+  endpoint:
+    health:
+      enabled: true
+  server:
+    port: 8081

@@ -10,11 +10,10 @@ import java.util.List;
 /**
  * Repository for votes on quotes.
  *
- * @author <a href="http://xxyy.github.io/">xxyy</a>
  * @since 2016-05-07
  */
 @Repository
 public interface QuoteVoteRepository extends CrudRepository<QuoteVote, QuoteVote.QuoteVoteId> {
-
     List<QuoteVote> findAllByIdQuote(Quote quote);
+    void deleteByIdQuote(Quote quote);
 }

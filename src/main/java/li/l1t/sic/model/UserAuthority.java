@@ -13,7 +13,6 @@ import javax.persistence.Table;
  * Represents an authority assigned to a user. Necessary because Spring doesn't accept users
  * without authorities as existing for some reason.
  *
- * @author <a href="http://xxyy.github.io/">xxyy</a>
  * @since 2016-02-22
  */
 @Entity
@@ -28,6 +27,9 @@ public class UserAuthority implements GrantedAuthority {
 
     @Column
     private String authority;
+
+    public UserAuthority() {
+    }
 
     public UserAuthority(RegisteredUser user, String authority) {
         this.user = user;

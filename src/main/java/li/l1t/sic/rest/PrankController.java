@@ -1,9 +1,9 @@
 package li.l1t.sic.rest;
 
-import li.l1t.sic.config.SicConfiguration;
+import li.l1t.sic.config.SicProperties;
 import li.l1t.sic.model.RegisteredUser;
 import li.l1t.sic.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,17 +14,19 @@ import java.util.Map;
 /**
  * Controls pranks and trolls hidden across the application.
  *
- * @author <a href="http://xxyy.github.io/">xxyy</a>
  * @since 2016-05-08
  */
 @RestController
 public class PrankController {
-    @Autowired
-    private SicConfiguration configuration;
-    @Autowired
-    private UserService userService;
+    private final SicProperties configuration;
+    private final UserService userService;
 
-    @RequestMapping("/api/prank/video/url")
+    public PrankController(SicProperties configuration, UserService userService) {
+        this.configuration = configuration;
+        this.userService = userService;
+    }
+
+    @GetMapping("/api/prank/video/url")
     public Map<String, Object> checkVideoPrank(Principal principal) {
         Map<String, Object> result = new HashMap<>();
         RegisteredUser user = userService.fromRegisteredNullable(principal);
@@ -42,7 +44,7 @@ public class PrankController {
         return result;
     }
 
-    @RequestMapping("/api/prank/video/reset")
+    @GetMapping("/api/prank/video/reset")
     public String resetVideoPrank(Principal principal) {
         RegisteredUser user = userService.fromRegistered(principal);
         userService.setSeenVideo(user, false);

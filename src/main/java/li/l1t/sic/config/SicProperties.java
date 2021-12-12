@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Service
 @ConfigurationProperties(prefix = "sic")
-public class SicConfiguration {
+public class SicProperties {
     private String registerSecret;
     private String footerText;
     private String videoUrl;

@@ -4,9 +4,9 @@ import li.l1t.sic.exception.PersonNotFoundException;
 import li.l1t.sic.model.Person;
 import li.l1t.sic.model.dto.PersonDto;
 import li.l1t.sic.model.repo.PersonRepository;
-import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Service handling people, providing a bridge between the controller and the model.
@@ -16,19 +16,19 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PersonService {
-    @Autowired
-    private PersonRepository personRepository;
+    private final PersonRepository personRepository;
 
-    public Iterable<Person> getAllPeople() {
+    public PersonService(PersonRepository personRepository) {
+        this.personRepository = personRepository;
+    }
+
+    public List<Person> getAllPeople() {
         return personRepository.findAll();
     }
 
     public Person getById(int id) {
-        Person person = personRepository.findOne(id);
-        if(person == null) {
-            throw new PersonNotFoundException(id);
-        }
-        return person;
+        return personRepository.findById(id)
+                .orElseThrow(() -> new PersonNotFoundException(id));
     }
 
     /**
@@ -41,17 +41,5 @@ public class PersonService {
         person.setName(dto.getName());
         personRepository.save(person);
         return person;
-    }
-
-    public PersonDto toDto(Person entity) {
-        PersonDto dto = new PersonDto();
-        dto.setId(entity.getId());
-        dto.setName(entity.getName());
-        return dto;
-    }
-
-    public Person findByDto(PersonDto personDto) {
-        Validate.notNull(personDto, "personDto");
-        return getById(personDto.getId());
     }
 }

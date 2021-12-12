@@ -4,13 +4,12 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import li.l1t.sic.misc.PersistentTokenGenerator;
 import li.l1t.sic.model.GuestUser;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.sql.Date;
+import java.util.Date;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
@@ -22,11 +21,13 @@ import java.time.ZoneId;
  */
 @Service
 public class TokenHandler {
-    @Autowired
-    private PersistentTokenGenerator tokenGenerator;
+    private final PersistentTokenGenerator tokenGenerator;
+    private final UserDetailsService userDetailsService;
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+    public TokenHandler(PersistentTokenGenerator tokenGenerator, UserDetailsService userDetailsService) {
+        this.tokenGenerator = tokenGenerator;
+        this.userDetailsService = userDetailsService;
+    }
 
     public UserDetails parseUserFromToken(String token) {
         String username = Jwts.parser()
