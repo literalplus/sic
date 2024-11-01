@@ -8,11 +8,13 @@ image:
 
 # secret should have these values analogous to application.yml-default:
 # - datasource-url
-# - datasource-username
-# - datasource-password
 # - register-secret
 # - guest-code
 secretName: sic
+
+# - datasource-username
+# - datasource-password
+dbSecretName: sic-db
 
 imagePullSecrets:
   - name: shared-image-pull
