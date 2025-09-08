@@ -31,10 +31,14 @@ spec:
             - name: spring_datasource_hikari_mimimum_idle
               value: "0"
             - name: SPRING_DATASOURCE_URL
+              {{- if .Values.springDatasourceUrl }}
+              value: "{{ .Values.springDatasourceUrl }}"
+              {{- else }}
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.secretName }}
                   key: datasource-url
+              {{- end }}
             - name: SPRING_DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:

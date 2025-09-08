@@ -45,3 +45,6 @@ resources:
   requests:
     cpu: 100m
     memory: 1500Mi
+  
+# Optional: directly configure the datasource URL here. If set, overrides secret.
+springDatasourceUrl: ""
