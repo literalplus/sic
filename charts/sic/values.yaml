@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: images.lit.plus/sic
+  repository: registry.lit.plus/sic
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
