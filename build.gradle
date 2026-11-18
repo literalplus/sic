@@ -37,7 +37,7 @@ dependencies {
     compileOnly group: 'org.springframework.boot', name: 'spring-boot-devtools'
 
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
-    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.6.0'
+    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.13.0'
 
     implementation group: 'org.postgresql', name: 'postgresql'
     implementation group: 'org.flywaydb', name: 'flyway-core', version: '8.2.1'
