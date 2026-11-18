@@ -9,7 +9,7 @@
     "combinejs": "mkdir -p build/resources/generated/static/js && concat-glob-cli -f 'src/main/js/*.js' -o build/resources/generated/static/js/sic.js"
   },
   "devDependencies": {
-    "bootstrap-less": "3.3.6",
+    "bootstrap-less": "3.3.8",
     "bootswatch-less": "3.3.4",
     "concat-glob-cli": "^0.1.0",
     "less": "^4.1.2"
